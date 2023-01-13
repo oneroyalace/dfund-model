@@ -1,18 +1,30 @@
 import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-  static targets = ["stateTable", "stateSelector", "stateTableCalifornia"]
+  static targets = [
+    "stateTable", 
+    "stateSelector", 
+    "stateTableAlabama",
+    "stateTableAlaska",
+    "stateTableArkansas",
+    "stateTableArizona",
+    "stateTableCalifornia",
+  ]
   connect() {
-    // console.log(this.stateSelectorTarget);
   }
 
+  // Toggles visibility of state info table
+  // Sets all other tables to display: none
+  // Sets selected table to display: inline
   toggleStateView(event){
-
-    console.log(this.stateSelectorTarget.value)
-    this.stateTableTargets.forEach(i => ! i.classList.contains("stateTable") && i.classList.add("stateTableInactive"))
+    this.stateTableTargets.forEach((i)  => {
+      if(i.classList.contains("stateTableActive")) {
+        i.classList.add("stateTableInactive")
+        i.classList.remove("stateTableActive")
+      }
+    })
     let table = eval(`this.stateTable${this.stateSelectorTarget.value}Target`)
-    console.log(table)
     table.classList.remove("stateTableInactive")
-    table.classList.add("stateTable")
+    table.classList.add("stateTableActive")
   }
 }
