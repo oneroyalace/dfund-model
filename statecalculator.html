@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="module">
+         import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+         
+         import StateController from "./state_controller.js" 
+         window.Stimulus = Application.start()
+         
+         Stimulus.register("state", StateController)
+      </script>
+      <script type="module" src="state_controller.js"></script>
+      <title></title>
+      <script></script>
+   </head>
+   <style>
+      .stateTableInactive {
+      display: none;
+      }
+      .stateTable {
+      display: inline;
+      }
+   </style>
+   <body>
+      <div data-controller="state">
+         <table>
+            <tr>
+               <th>Attribute</th>
+               <th>Value</th>
+            </tr>
+            <tr>
+               <td>Population</td>
+               <td>10,617,423</td>
+            </tr>
+            <tr>
+               <td>Congressional districts</td>
+               <td>14</td>
+            </tr>
+            <tr>
+               <td>School systems</td>
+               <td>180</td>
+            </tr>
+            <tr>
+               <td>Special districts</td>
+               <td>511</td>
+            </tr>
+            <tr>
+               <td>Township governments</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Municipal governments</td>
+               <td>537</td>
+            </tr>
+            <tr>
+               <td>County governments</td>
+               <td>152</td>
+            </tr>
+            <tr>
+               <td>State governments</td>
+               <td>1</td>
+            </tr>
+         </table>
+         <table>
+            <tr>
+               <th>Demographic areas</th>
+            </tr>
+            <tr>
+               <td>Women</td>
+            </tr>
+            <tr>
+               <td>AAPI</td>
+            </tr>
+            <tr>
+               <td>Black/African-American</td>
+            </tr>
+            <tr>
+               <td>Indigenous</td>
+            </tr>
+            <tr>
+               <td>Latinx/Hispanic</td>
+            </tr>
+            <tr>
+               <td>LGBTQIA+</td>
+            </tr>
+         </table>
+         <table>
+            <tr>
+               <th>Government coverage areas</th>
+            </tr>
+            <tr>
+               <td>Community services</td>
+            </tr>
+            <tr>
+               <td>Criminal justice</td>
+            </tr>
+            <tr>
+               <td>Education</td>
+            </tr>
+            <tr>
+               <td>Elections</td>
+            </tr>
+            <tr>
+               <td>Environment</td>
+            </tr>
+            <tr>
+               <td>Healthcare</td>
+            </tr>
+         </table>
+         <table>
+         <tr>
+            <th>Calc detail</th>
+            <th>Value</th>
+         </tr>
+         <tr>
+            <td>Multiplier</td>
+            <td>3</td>
+         </tr>
+         <tr>
+            <td>Editorial expenses</td>
+            <td>60%</td>
+         </tr>
+         <tr>
+            <td>Non-editorial expenses</td>
+            <td>40%</td>
+         </tr>
+         <table class="stateTableInactive" data-state-target="stateTableAlabama table">
+            <tr>
+               <th>State</td>
+               <td>Alabama</td>
+            </tr>
+            <tr>
+               <th>Population</td>
+               <td> 4,903,185 </td>
+            </tr>
+            <tr>
+               <th>Size tag</td>
+               <td>Small</td>
+            </tr>
+            <tr>
+               <th>Congressional districts</th>
+               <td>7</td>
+            </tr>
+            <tr>
+               <th>School Systems</th>
+               <td> 137 </td>
+            </tr>
+            <tr>
+               <th>Special Districts</th>
+               <td> 530 </td>
+            </tr>
+            <tr>
+               <th>Township Governments</th>
+               <td> -   </td>
+            </tr>
+            <tr>
+               <th>Municipal Governments</th>
+               <td> 461 </td>
+            </tr>
+            <tr>
+               <th>County Governments</th>
+               <td> 67 </td>
+            </tr>
+            <tr>
+               <th>State Governments</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>Annual Foundation Giving (2015)</th>
+               <td> $229,406,215 </td>
+            </tr>
+         </table>
+         <table class="stateTableInactive" data-state-target="stateTable stateTableAlaska">
+            <tr>
+               <th>State</td>
+               <td>Alaska</td>
+            </tr>
+            <tr>
+               <th>Population</td>
+               <td> 731,545 </td>
+            </tr>
+            <tr>
+               <th>Size tag</td>
+               <td>Extra Small</td>
+            </tr>
+            <tr>
+               <th>Congressional districts</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>School Systems</th>
+               <td> 55 </td>
+            </tr>
+            <tr>
+               <th>Special Districts</th>
+               <td> 15 </td>
+            </tr>
+            <tr>
+               <th>Township Governments</th>
+               <td> -   </td>
+            </tr>
+            <tr>
+               <th>Municipal Governments</th>
+               <td> 149 </td>
+            </tr>
+            <tr>
+               <th>County Governments</th>
+               <td> 15 </td>
+            </tr>
+            <tr>
+               <th>State Governments</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>Annual Foundation Giving (2015)</th>
+               <td> $42,426,591 </td>
+            </tr>
+         </table>
+         <table class="stateTableInactive" data-state-target="stateTable stateTableArizona">
+            <tr>
+               <th>State</td>
+               <td>Arizona</td>
+            </tr>
+            <tr>
+               <th>Population</td>
+               <td> 7,278,717 </td>
+            </tr>
+            <tr>
+               <th>Size tag</td>
+               <td>Medium</td>
+            </tr>
+            <tr>
+               <th>Congressional districts</th>
+               <td>9</td>
+            </tr>
+            <tr>
+               <th>School Systems</th>
+               <td> 254 </td>
+            </tr>
+            <tr>
+               <th>Special Districts</th>
+               <td> 310 </td>
+            </tr>
+            <tr>
+               <th>Township Governments</th>
+               <td> -   </td>
+            </tr>
+            <tr>
+               <th>Municipal Governments</th>
+               <td> 91 </td>
+            </tr>
+            <tr>
+               <th>County Governments</th>
+               <td> 15 </td>
+            </tr>
+            <tr>
+               <th>State Governments</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>Annual Foundation Giving (2015)</th>
+               <td> $344,965,290 </td>
+            </tr>
+         </table>
+         <table class="stateTableInactive" data-state-target="stateTable stateTableArkansas">
+            <tr>
+               <th>State</td>
+               <td>Arkansas</td>
+            </tr>
+            <tr>
+               <th>Population</td>
+               <td> 3,017,804 </td>
+            </tr>
+            <tr>
+               <th>Size tag</td>
+               <td>Small</td>
+            </tr>
+            <tr>
+               <th>Congressional districts</th>
+               <td>4</td>
+            </tr>
+            <tr>
+               <th>School Systems</th>
+               <td> 235 </td>
+            </tr>
+            <tr>
+               <th>Special Districts</th>
+               <td> 730 </td>
+            </tr>
+            <tr>
+               <th>Township Governments</th>
+               <td> -   </td>
+            </tr>
+            <tr>
+               <th>Municipal Governments</th>
+               <td> 501 </td>
+            </tr>
+            <tr>
+               <th>County Governments</th>
+               <td> 75 </td>
+            </tr>
+            <tr>
+               <th>State Governments</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>Annual Foundation Giving (2015)</th>
+               <td> $721,774,468 </td>
+            </tr>
+         </table>
+         <table class="stateTableInactive" data-state-target="stateTable stateTableCalifornia">
+            <tr>
+               <th>State</td>
+               <td>California</td>
+            </tr>
+            <tr>
+               <th>Population</td>
+               <td> 39,512,223 </td>
+            </tr>
+            <tr>
+               <th>Size tag</td>
+               <td>Extra Large</td>
+            </tr>
+            <tr>
+               <th>Congressional districts</th>
+               <td>53</td>
+            </tr>
+            <tr>
+               <th>School Systems</th>
+               <td> 1,068 </td>
+            </tr>
+            <tr>
+               <th>Special Districts</th>
+               <td> 2,894 </td>
+            </tr>
+            <tr>
+               <th>Township Governments</th>
+               <td> -   </td>
+            </tr>
+            <tr>
+               <th>Municipal Governments</th>
+               <td> 482 </td>
+            </tr>
+            <tr>
+               <th>County Governments</th>
+               <td> 57 </td>
+            </tr>
+            <tr>
+               <th>State Governments</th>
+               <td>1</td>
+            </tr>
+            <tr>
+               <th>Annual Foundation Giving (2015)</th>
+               <td> $8,372,783,639 </td>
+            </tr>
+         </table>
+         <select name="state" data-state-target="stateSelector" data-action="state#toggleStateView">
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <option value="District of Columbia">District of Columbia</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+         </select>
+      </div>
+   </body>
+</html>
