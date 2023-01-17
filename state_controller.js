@@ -4,6 +4,9 @@ export default class extends Controller {
   static targets = [
     "numDemCoverageAreasSelector",
     "numGovCoverageAreasSelector",
+    "editorialEstimate",
+    "nonEditorialEstimate",
+    "fundingEstimate",
     "stateTable", 
     "stateSelector", 
     "stateTableAlabama",
@@ -28,17 +31,31 @@ export default class extends Controller {
     let table = eval(`this.stateTable${this.stateSelectorTarget.value}Target`)
     table.classList.remove("stateTableInactive")
     table.classList.add("stateTableActive")
+    this.updateEstimates()
   }
 
   getActiveStateTable() {
     return this.stateTableTargets.filter(i => i.classList.contains("stateTableActive"))[0]
   }
 
-  updateExpenseEstimate() {
-    console.log("updated expens esteimate")
-    let activeStateTable = this.getActiveStateTable()
-    console.log(activeStateTable)
+  getSizeMultiplier(stateSize) {
+    let multiplierMap = {
+      "Extra Small": 0.5,
+      "Small": 1,
+      "Medium": 2,
+      "Large": 3,
+      "Extra Large": 4
+    }
+    return multiplierMap[stateSize]
+  }
 
+  updateEstimates() {
+    let activeStateTable = this.getActiveStateTable()
+
+    let numDemographicCoverageAreas = parseInt(this.numDemCoverageAreasSelectorTarget.value)
+    let numGovernmentCoverageAreas = parseInt(this.numGovCoverageAreasSelectorTarget.value)
+
+    let stateSize = activeStateTable.querySelector(".stateSize").textContent
     let num_100_000s = parseInt(activeStateTable.querySelector(".statePopulation").dataset.population) / 100_000
     let numCongressionalDistricts = parseInt(activeStateTable.querySelector(".congressionalDistricts").dataset.congressionalDistricts)
     let numSchoolSystems = parseInt(activeStateTable.querySelector(".schoolSystems").dataset.schoolSystems)
@@ -49,22 +66,39 @@ export default class extends Controller {
     let numStateGovernments = parseInt(activeStateTable.querySelector(".stateGovernments").dataset.stateGovernments)
     let foundationGiving = parseInt(activeStateTable.querySelector(".foundationGiving").dataset.foundationGiving)
 
-    console.log(num_100_000s)
-    console.log(numCongressionalDistricts)
-    console.log(numSchoolSystems)
-    console.log(numSpecialDistricts)
-    console.log(numTownshipGovernments)
-    console.log(numMunicipalGovernments)
-    console.log(numCountyGovernments)
-    console.log(numStateGovernments)
-    console.log(foundationGiving)
-      
-  }
-  toggleNumDemCoverageAreas(event) {
-    this.updateExpenseEstimate()
+    let multiplier = this.getSizeMultiplier(stateSize)
+
+    let employees_100_000 = (num_100_000s * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employees_cd = (numCongressionalDistricts * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employees_school = (numSchoolSystems * multiplier * (1 + numDemographicCoverageAreas))
+    let employees_special = (numSpecialDistricts * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employeesTown = (numTownshipGovernments * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employeesMuni = (numMunicipalGovernments * (numGovernmentCoverageAreas + numDemographicCoverageAreas)) 
+    let employeesCounty = (numCountyGovernments * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employeesState = (numStateGovernments * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+
+    let editorialEmployeeEstimate = employees_100_000 + employees_cd + employees_school + employees_special + employeesTown + employeesMuni + employeesCounty + employeesState
+    let nonEditorialEmployeeEstimate = editorialEmployeeEstimate * (2/3)
+    let fundingEstimate = editorialEmployeeEstimate * 96_058.43902 * (5/3)
+
+    this.editorialEstimateTarget.textContent = this.prettifyInteger(Math.round(editorialEmployeeEstimate).toString())
+    this.nonEditorialEstimateTarget.textContent = this.prettifyInteger(Math.round(nonEditorialEmployeeEstimate).toString())
+    this.fundingEstimateTarget.textContent = this.prettifyInteger(Math.round(fundingEstimate).toString())
+
   }
 
+  // Add commas to a stringified integer
+  prettifyInteger(numberString) {
+    return numberString.length > 3 ? this.prettifyInteger(numberString.slice(0,-3)) + "," + numberString.slice(-3) : numberString
+  }
+
+  // Update estimates when avg # demographic coverage areas is changed
+  toggleNumDemCoverageAreas(event) {
+    this.updateEstimates()
+  }
+
+  // Update estimates when avg # demographic coverage areas is changed
   toggleNumGovCoverageAreas(event) {
-    this.updateExpenseEstimate()
+    this.updateEstimates()
   }
 }
