@@ -9,7 +9,7 @@ export default class extends Controller {
     "fundingEstimate",
     "stateTable", 
     "stateSelector", 
-    "stateTableAlabama",
+    "stateTableAlabama", // use html id attributes instead of stimulus targets
     "stateTableAlaska",
     "stateTableArkansas",
     "stateTableArizona",
@@ -34,10 +34,12 @@ export default class extends Controller {
     this.updateEstimates()
   }
 
+  // Return the currently shown state info table
   getActiveStateTable() {
     return this.stateTableTargets.filter(i => i.classList.contains("stateTableActive"))[0]
   }
 
+  // Get multiplier value for a given state size tag
   getSizeMultiplier(stateSize) {
     let multiplierMap = {
       "Extra Small": 0.5,
@@ -49,6 +51,7 @@ export default class extends Controller {
     return multiplierMap[stateSize]
   }
 
+  // Re-calculate estimates of # of editorial employees, non-editorial employees, and $ required for state
   updateEstimates() {
     let activeStateTable = this.getActiveStateTable()
 
