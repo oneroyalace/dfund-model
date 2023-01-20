@@ -16,6 +16,10 @@ export default class extends Controller {
     "stateTableCalifornia"
   ]
   connect() {
+    console.log("hotwired")
+    this.stateTableAlabamaTarget.classList.remove("stateTableInactive")
+    this.stateTableAlabamaTarget.classList.add("stateTableActive")
+    this.updateEstimates()
   }
 
   // Toggles visibility of state info table
