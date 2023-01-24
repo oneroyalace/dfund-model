@@ -13,7 +13,21 @@ export default class extends Controller {
     "stateTableAlaska",
     "stateTableArkansas",
     "stateTableArizona",
-    "stateTableCalifornia"
+    "stateTableCalifornia",
+
+    "womenReportersInput",
+    "aapiReportersInput",
+    "blackReportersInput",
+    "indigenousReportersInput",
+    "latinxReportersInput",
+    "lgbtReportersInput",
+    "communityServicesReportersInput",
+    "criminalJusticeReportersInput",
+    "educationReportersInput",
+    "electionsReportersInput",
+    "environmentReportersInput",
+    "healthcareReportersInput",
+    "infrastructureReportersInput",
   ]
   connect() {
     console.log("hotwired")
@@ -59,9 +73,23 @@ export default class extends Controller {
   updateEstimates() {
     let activeStateTable = this.getActiveStateTable()
 
-    let numDemographicCoverageAreas = parseInt(this.numDemCoverageAreasSelectorTarget.value)
-    let numGovernmentCoverageAreas = parseInt(this.numGovCoverageAreasSelectorTarget.value)
+    let numDemographicCoverageReporters = parseFloat(this.womenReportersInputTarget.value) + 
+      parseFloat(this.aapiReportersInputTarget.value) +
+      parseFloat(this.blackReportersInputTarget.value) +
+      parseFloat(this.indigenousReportersInputTarget.value) +
+      parseFloat(this.latinxReportersInputTarget.value) +
+      parseFloat(this.lgbtReportersInputTarget.value)
 
+      console.log(numDemographicCoverageReporters)
+
+    let numGovernmentCoverageReporters = parseFloat(this.communityServicesReportersInputTarget.value) +
+      parseFloat(this.criminalJusticeReportersInputTarget.value) +
+      parseFloat(this.educationReportersInputTarget.value) +
+      parseFloat(this.electionsReportersInputTarget.value) +
+      parseFloat(this.environmentReportersInputTarget.value) +
+      parseFloat(this.healthcareReportersInputTarget.value) +
+      parseFloat(this.infrastructureReportersInputTarget.value)
+  
     let stateSize = activeStateTable.querySelector(".stateSize").textContent
     let num_100_000s = parseInt(activeStateTable.querySelector(".statePopulation").dataset.population) / 100_000
     let numCongressionalDistricts = parseInt(activeStateTable.querySelector(".congressionalDistricts").dataset.congressionalDistricts)
@@ -75,14 +103,17 @@ export default class extends Controller {
 
     let multiplier = this.getSizeMultiplier(stateSize)
 
-    let employees_100_000 = (num_100_000s * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
-    let employees_cd = (numCongressionalDistricts * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
-    let employees_school = (numSchoolSystems * multiplier * (1 + numDemographicCoverageAreas))
-    let employees_special = (numSpecialDistricts * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
-    let employeesTown = (numTownshipGovernments * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
-    let employeesMuni = (numMunicipalGovernments * (numGovernmentCoverageAreas + numDemographicCoverageAreas)) 
-    let employeesCounty = (numCountyGovernments * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
-    let employeesState = (numStateGovernments * multiplier * (numGovernmentCoverageAreas + numDemographicCoverageAreas))
+    let employees_100_000 = (num_100_000s * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
+    let employees_cd = (numCongressionalDistricts * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
+    
+    // I think the aberration in the line below reveals a bug in the Excel model
+    // Setting parameters to 0/0 reporters/locality will yield a total # employees > 0
+    let employees_school = (numSchoolSystems * multiplier * (1 + numDemographicCoverageReporters))
+    let employees_special = (numSpecialDistricts * multiplier * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
+    let employeesTown = (numTownshipGovernments * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
+    let employeesMuni = (numMunicipalGovernments * (numGovernmentCoverageReporters + numDemographicCoverageReporters)) 
+    let employeesCounty = (numCountyGovernments * multiplier * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
+    let employeesState = (numStateGovernments * multiplier * (numGovernmentCoverageReporters + numDemographicCoverageReporters))
 
     let editorialEmployeeEstimate = employees_100_000 + employees_cd + employees_school + employees_special + employeesTown + employeesMuni + employeesCounty + employeesState
     let nonEditorialEmployeeEstimate = editorialEmployeeEstimate * (2/3)
@@ -91,7 +122,6 @@ export default class extends Controller {
     this.editorialEstimateTarget.textContent = this.prettifyInteger(Math.round(editorialEmployeeEstimate).toString())
     this.nonEditorialEstimateTarget.textContent = this.prettifyInteger(Math.round(nonEditorialEmployeeEstimate).toString())
     this.fundingEstimateTarget.textContent = this.prettifyInteger(Math.round(fundingEstimate).toString())
-
   }
 
   // Add commas to a stringified integer
@@ -100,12 +130,8 @@ export default class extends Controller {
   }
 
   // Update estimates when avg # demographic coverage areas is changed
-  toggleNumDemCoverageAreas(event) {
-    this.updateEstimates()
-  }
-
-  // Update estimates when avg # demographic coverage areas is changed
-  toggleNumGovCoverageAreas(event) {
+  toggleNumReporters(event) {
+    console.log("fire in the conservatory")
     this.updateEstimates()
   }
 }
