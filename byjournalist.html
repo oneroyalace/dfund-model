@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <style>
+        body {
+            background-color: #fdf9f6;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box {
+            margin: 3px;
+            border: solid 2px;
+            border-radius: 10px;
+        }
+        h2.boxHeader {
+            text-align: center;
+        }
+        div.estimateDescription {
+            font-size: x-large;
+        }
+        div.estimateValue {
+            font-size: xxx-large;
+        }
+        input.numReportersInput {
+            width: 2em;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="box">
+                <h2 class="boxHeader">Per Congressional District</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="criminalJusticeReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="electionsReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="environmentReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="healthcareReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h2 class="boxHeader">Per School System</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputSS" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h2 class="boxHeader">Per Township Government</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="communityServicesReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="criminalJusticeReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="electionsReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="environmentReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="healthcareReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="infrastructureReportersInputTownship" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h2 class="boxHeader">Per Municipal Government</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="communityServicesReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="criminalJusticeReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="electionsReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="environmentReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="healthcareReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="infrastructureReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h2 class="boxHeader">Per County Government</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="communityServicesReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="criminalJusticeReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="electionsReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="environmentReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="healthcareReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="infrastructureReportersInputCounty" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h2 class="boxHeader">Per State Government</h2>
+                <table>
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="womenReportersInputState" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="aapiReportersInputState" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="blackReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="indigenousReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="latinxReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="lgbtReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="communityServicesReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="criminalJusticeReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="educationReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="electionsReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="environmentReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="healthcareReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="numReportersInput" data-state-target="infrastructureReportersInputState" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+
+</html>
