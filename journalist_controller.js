@@ -6,11 +6,17 @@ const numberOfSDs = { xs: 2301, s: 11_294, m: 10_303, l: 6628, xl: 8016 }
 const numberOfTSs = { xs: 2447, s: 2497, m: 6097, l: 4283, xl: 929 }
 const numberOfMunis = { xs: 1016, s: 5918, m: 5518, l: 4330, xl: 2713 }
 const numberOfCounties = { xs: 174, s: 1070, m: 845, l: 508, xl: 434 }
-const numberOfStates = { xs: 6, s: 21, m: 13, l: 5, xl: 4 }
+const numberOfStates = { xs: 6, s: 21, m: 14, l: 5, xl: 4 }
 
 export default class extends Controller {
   static targets = [
-    "numJournalistsForm"
+    "numJournalistsForm",
+    "cdCalculation",
+    "ssCalculation",
+    "tsCalculation",
+    "muniCalculation",
+    "countyCalculation",
+    "stateCalculation",
   ]
   connect() {
     console.log("hotwired")
@@ -32,7 +38,8 @@ export default class extends Controller {
 
  
   // Re-calculate estimates of # of editorial employees, non-editorial employees, and $ required for state
-  updateEstimates() {
+  updateEstimates(event) {
+    event.preventDefault()
     let reportersPerCD = this.sumValuesOfInputs(document.querySelectorAll(".numCDReportersInput"))
     let reportersPerSS = this.sumValuesOfInputs(document.querySelectorAll(".numSSReportersInput"))
     let reportersPerTS = this.sumValuesOfInputs(document.querySelectorAll(".numTSReportersInput"))
@@ -55,6 +62,56 @@ export default class extends Controller {
     console.log("total county reporters", totalCountyReporters)
     console.log("total state reporters", totalStateReporters)
 
+    this.cdCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, numberOfCDs, false)
+    this.ssCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, numberOfSSs, true)
+    this.tsCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerTS, numberOfTSs, false)
+    this.muniCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerMuni, numberOfMunis, false)
+    this.countyCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerCounty, numberOfCounties, true)
+    this.stateCalculationTarget.innerHTML = this.produceCalculationSpan(reportersPerState, numberOfStates, true)
+
+    // console.log(this.produceCalculationSpan(reportersPerCD, numberOfCDs, false))
+    // console.log(this.produceCalculationSpan(reportersPerSS, numberOfSSs, true))
+    // console.log(this.produceCalculationSpan(reportersPerTS, numberOfTSs, false))
+    // console.log(this.produceCalculationSpan(reportersPerMuni, numberOfMunis, false))
+    // console.log(this.produceCalculationSpan(reportersPerCounty, numberOfCounties, true))
+    // console.log(this.produceCalculationSpan(reportersPerState, numberOfStates, true))
+
+  }
+
+  produceCalculationSpan(reportersPerLocality, localitySizeOccurrencesMap, useMultipliers) {
+    let span = "<span>"
+    let innerSpans = []
+    const reportersPerLocalityPrefix = 
+      `<span>
+        <span data-action="mouseover->journalist#highlightCalculation"
+              class"reporters-per-locality">${reportersPerLocality}
+        </span>
+        <span class="multiplication"> * </span>
+        <span class="opening-parens-brace">${useMultipliers ? "[" : "("}</span>
+      `
+    for(const localitySize in localitySizeOccurrencesMap) {
+      const localitySizeOccurrences = localitySizeOccurrencesMap[localitySize]
+      let localityTypeSpan = ""
+      if(! useMultipliers) {
+        localityTypeSpan += `<span class="locality-size-occurrences">${localitySizeOccurrences}</span>`
+        innerSpans.push(localityTypeSpan)
+        continue
+      }
+        
+      localityTypeSpan += '<span class="parentheses">(</span>'
+      localityTypeSpan += `<span class="locality-size-occurrences">${localitySizeOccurrences}</span>`
+      localityTypeSpan += '<span class="multiplication"> * </span>'
+      localityTypeSpan += `<span class="multiplier">${this.getSizeMultiplier(localitySize)}</span>`
+      localityTypeSpan += '<span class="parentheses">)</span>'
+      innerSpans.push(localityTypeSpan)
+  }
+    span += reportersPerLocalityPrefix + innerSpans.join('<span class="addition"> + </span>')
+    span += `<span class="closing-parens-brace">${useMultipliers ? "]" : ")"}</span>`
+    span += "</span>"
+    return span
+}
+writeCalculation() {
+
   }
 
   // Add commas to a stringified integer
@@ -65,7 +122,7 @@ export default class extends Controller {
   // Update estimates when avg # demographic coverage areas is changed
   toggleNumReporters(event) {
     console.log("fire in the conservatory")
-    this.updateEstimates()
+    this.updateEstimates(event)
   }
 
   getSizeMultiplier(stateSize) {
