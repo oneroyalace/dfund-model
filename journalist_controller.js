@@ -13,12 +13,15 @@ const stateSubgroupSizes = { xs: 6, s: 21, m: 14, l: 5, xl: 4 }
 export default class extends Controller {
   static targets = [
     "numJournalistsForm",
+
     "cdCalculationSpan",
     "ssCalculationSpan",
     "tsCalculationSpan",
     "muniCalculationSpan",
     "countyCalculationSpan",
     "stateCalculationSpan",
+    "calculationDiv",
+
 
     "numEditorialEmployeesEstimateSpan",
     "numNonEditorialEmployeesEstimateSpan",
@@ -144,6 +147,10 @@ export default class extends Controller {
       reportersPerLocalityCalculationSpan.classList.toggle(`reporters-${localityType}-span-highlighted`)
     }
 
+  }
+
+  toggleCalculationVisibility() {
+    this.calculationDivTarget.classList.toggle("display-none")
   }
 
   displayLocalitySubgroupNumbers(event) {
