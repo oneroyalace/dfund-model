@@ -27,18 +27,26 @@ export default class extends Controller {
     "numNonEditorialEmployeesEstimateSpan",
     "totalCostEstimateSpan",
 
-    "localitySubgroupsTable",
-    "localitySubgroupsTableHeader",
-    "xsLocalitiesRow",
-    "sLocalitiesRow",
-    "mLocalitiesRow",
-    "lLocalitiesRow",
-    "xlLocalitiesRow",
+    "cdTableRow",
+    "ssTableRow",
+    "tsTableRow",
+    "muniTableRow",
+    "countyTableRow",
+    "stateTableRow",
+
+    // "localitySubgroupsTable",
+    // "localitySubgroupsTableHeader",
+    // "xsLocalitiesRow",
+    // "sLocalitiesRow",
+    // "mLocalitiesRow",
+    // "lLocalitiesRow",
+    // "xlLocalitiesRow",
 
   ]
   connect() {
     console.log("hotwired")
     this.updateEstimates()
+    // this.toggleCalculationVisibility()
   }
 
   // Given a set of Input elements, converts their values to integres and sums them
@@ -84,6 +92,13 @@ export default class extends Controller {
     let editorialEmployeesEstimate = totalCDReporters + totalSSReporters + totalTSReporters + totalMuniReporters + totalCountyReporters + totalStateReporters
     let nonEditorialEmployeesEstimate = editorialEmployeesEstimate * (2/3)
     let totalCostEstimate = 96_058.4390217831 * (nonEditorialEmployeesEstimate + editorialEmployeesEstimate)
+
+    this.cdTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCDReporters))
+    this.ssTableRowTarget.innerText = this.prettifyInteger(Math.round(totalSSReporters))
+    this.tsTableRowTarget.innerText = this.prettifyInteger(Math.round(totalTSReporters))
+    this.muniTableRowTarget.innerText = this.prettifyInteger(Math.round(totalMuniReporters))
+    this.countyTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCountyReporters))
+    this.stateTableRowTarget.innerText = this.prettifyInteger(Math.round(totalStateReporters))
 
     this.cdCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, cdSubgroupSizes, "cd", false)
     this.ssCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, ssSubgroupSizes, "ss", true)
