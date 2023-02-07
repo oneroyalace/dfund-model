@@ -13,8 +13,19 @@
         <script type="module" src="state_controller.js"></script>
         <title></title>
         <script></script>
-    </head>
+    </head> 
     <style>
+        :root {
+          --teal: #44AA99;
+          --cyan: #88CCEE;
+          --sand: #DDCC77;
+          --rose: #CC6677;
+          --purple: #AA4499;
+          --wine: #882255;
+
+          --calculation-underline-thickness: 3pt;
+        }
+          
         body {
             background-color: #fdf9f6;
         }
@@ -36,10 +47,79 @@
         div.estimateValue {
             font-size: xxx-large;
         }
-        .num-reporters-input {
+
+        div.calculation {
+          font-size: large;
+        }
+
+        input.num-reporters-input {
             width: 2em;
             text-align: center;
         }
+        
+        .input-highlighted {
+          border-width: medium;
+        }
+
+        .span-highlighted {
+          border-style: solid;
+          border-width: 2px
+        }
+
+        input.num-cd-reporters-input-highlighted, span.reporters-cd-span-highlighted { 
+          border-color: var(--teal)
+        }
+        
+        input.num-ss-reporters-input-highlighted, span.reporters-ss-span-highlighted { 
+          border-color: var(--cyan)
+        }
+        
+        input.num-ts-reporters-input-highlighted, span.reporters-ts-span-highlighted { 
+          border-color: var(--sand)
+        }
+        
+        input.num-muni-reporters-input-highlighted, span.reporters-muni-span-highlighted { 
+          border-color: var(--rose)
+        }
+        
+        input.num-county-reporters-input-highlighted, span.reporters-county-span-highlighted { 
+          border-color: var(--purple)
+        }
+        
+        input.num-state-reporters-input-highlighted, span.reporters-state-span-highlighted { 
+          border-color: var(--wine)
+        }
+
+        .xs-underline {
+          text-decoration: underline;
+          text-decoration-thickness: var(--calculation-underline-thickness);
+          text-decoration-color: var(--teal);
+        }
+
+        .s-underline {
+          text-decoration: underline;
+          text-decoration-thickness: var(--calculation-underline-thickness);
+          text-decoration-color: var(--cyan);
+        }
+
+        .m-underline {
+          text-decoration: underline;
+          text-decoration-thickness: var(--calculation-underline-thickness);
+          text-decoration-color: var(--sand);
+        }
+
+        .l-underline {
+          text-decoration: underline;
+          text-decoration-thickness: var(--calculation-underline-thickness);
+          text-decoration-color: var(--rose);
+        }
+
+        .xl-underline {
+          text-decoration: underline;
+          text-decoration-thickness: var(--calculation-underline-thickness);
+          text-decoration-color: var(--puruple);
+        }
+
     </style>
     <body>
         <div data-controller="journalist">
@@ -53,37 +133,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input " data-state-target="womenReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input " data-state-target="womenReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input" data-state-target="aapiReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="aapiReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input" data-state-target="blackReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="blackReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input" data-state-target="indigenousReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="indigenousReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input" data-state-target="latinxReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="latinxReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCDReportersInput num-reporters-input" data-state-target="lgbtReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="lgbtReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -94,43 +174,43 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Community Services</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="criminalJusticeReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Criminal Justice</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="educationReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="educationReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="electionsReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="electionsReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Elections</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="environmentReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="environmentReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Environment</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="healthcareReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="healthcareReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Healthcare</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCDReportersInput num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
                                     <span>Infrastructure</span>
                                 </td>
                             </tr>
@@ -144,37 +224,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="womenReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="womenReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="aapiReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="aapiReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="blackReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="blackReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="indigenousReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="indigenousReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="latinxReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="latinxReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numSSReportersInput num-reporters-input" data-state-target="lgbtReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ss-reporters-input num-reporters-input" data-state-target="lgbtReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -185,7 +265,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numSSReportersInput num-reporters-input" data-state-target="educationReportersInputSS" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ss-reporters-input num-reporters-input" data-state-target="educationReportersInputSS" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
@@ -197,39 +277,39 @@
                             <tr>
                                 <th>Reporters Per Demographic Area</th>
                             </tr>
-                            <tr>
+                            <tr>   
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="womenReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="womenReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="aapiReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="aapiReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="blackReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="blackReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="indigenousReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="indigenousReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="latinxReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="latinxReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numTSReportersInput num-reporters-input" data-state-target="lgbtReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-ts-reporters-input num-reporters-input" data-state-target="lgbtReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -240,43 +320,43 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="communityServicesReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Community Services</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="criminalJusticeReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Criminal Justice</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="educationReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="educationReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="electionsReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="electionsReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Elections</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="environmentReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="environmentReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Environment</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="healthcareReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="healthcareReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Healthcare</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numTSReportersInput num-reporters-input" data-state-target="infrastructureReportersInputTownship" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputTownship" data-action="state#toggleNumReporters" />
                                     <span>Infrastructure</span>
                                 </td>
                             </tr>
@@ -290,37 +370,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="womenReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="womenReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="aapiReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="aapiReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="blackReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="blackReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="indigenousReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="indigenousReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="latinxReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="latinxReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numMuniReportersInput num-reporters-input" data-state-target="lgbtReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-muni-reporters-input num-reporters-input" data-state-target="lgbtReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -331,43 +411,43 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="communityServicesReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Community Services</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="criminalJusticeReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Criminal Justice</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="educationReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="educationReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="electionsReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="electionsReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Elections</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="environmentReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="environmentReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Environment</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="healthcareReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="healthcareReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Healthcare</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numMuniReportersInput num-reporters-input" data-state-target="infrastructureReportersInputMunicipal" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputMunicipal" data-action="state#toggleNumReporters" />
                                     <span>Infrastructure</span>
                                 </td>
                             </tr>
@@ -381,37 +461,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="womenReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="womenReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="aapiReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="aapiReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="blackReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="blackReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="indigenousReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="indigenousReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="latinxReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="latinxReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numCountyReportersInput num-reporters-input" data-state-target="lgbtReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-county-reporters-input num-reporters-input" data-state-target="lgbtReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -422,43 +502,43 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="communityServicesReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Community Services</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="criminalJusticeReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Criminal Justice</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="educationReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="educationReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="electionsReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="electionsReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Elections</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="environmentReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="environmentReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Environment</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="healthcareReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="healthcareReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Healthcare</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numCountyReportersInput num-reporters-input" data-state-target="infrastructureReportersInputCounty" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCounty" data-action="state#toggleNumReporters" />
                                     <span>Infrastructure</span>
                                 </td>
                             </tr>
@@ -472,37 +552,37 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="womenReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="womenReportersInputState" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">Women</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="aapiReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="aapiReportersInputState" data-action="state#toggleNumReporters" />
                                     <span style="width: 90%;">AAPI</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="blackReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="blackReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Black/African-American</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="indigenousReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="indigenousReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Indigenous</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="latinxReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="latinxReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Latinx/Hispanic</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="0" class="numStateReportersInput num-reporters-input" data-state-target="lgbtReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="0" class="num-state-reporters-input num-reporters-input" data-state-target="lgbtReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>LGBTQIA+</span>
                                 </td>
                             </tr>
@@ -513,43 +593,43 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="communityServicesReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Community Services</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="criminalJusticeReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Criminal Justice</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="educationReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="educationReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Education</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="electionsReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="electionsReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Elections</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="environmentReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="environmentReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Environment</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="healthcareReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="healthcareReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Healthcare</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" value="1" class="numStateReportersInput num-reporters-input" data-state-target="infrastructureReportersInputState" data-action="state#toggleNumReporters" />
+                                    <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputState" data-action="state#toggleNumReporters" />
                                     <span>Infrastructure</span>
                                 </td>
                             </tr>
@@ -558,18 +638,91 @@
                 </div>
                 <input type="submit" value="update">
             </form>
-            <div class="calculation">
-              <span data-journalist-target="cdCalculation"></span> + 
-              <br>
-              <span data-journalist-target="ssCalculation"></span> +
-              <br>
-              <span data-journalist-target="tsCalculation"></span> + 
-              <br>
-              <span data-journalist-target="muniCalculation"></span> + 
-              <br>
-              <span data-journalist-target="countyCalculation"></span> + 
-              <br>
-              <span data-journalist-target="stateCalculation"></span>
+            <div class="container" style="justify-content: center;">
+              <div class="box">
+                <div class="estimateDescription">
+                  Estimated editorial employees required
+                </div>
+                <div class="estimateValue">
+                  <span data-journalist-target="numEditorialEmployeesEstimateSpan" class="num-journalists-estimate"></span>
+                </div>
+              </div>
+              <div class="box">
+                <div class="estimateDescription">
+                  Estimated editorial employees required
+                </div>
+                <div class="estimateValue">
+                  <span data-journalist-target="numNonEditorialEmployeesEstimateSpan" class="num-journalists-estimate"></span>
+                </div>
+              </div>
+              <div class="box">
+                <div class="estimateDescription">
+                  Estimated funds required:
+                </div>
+                <div class="estimateValue">
+                  <span data-journalist-target="totalCostEstimateSpan"></span>
+                </div>
+              </div>
+            </div>
+            <form data-action="journalist#showCalculation">
+              <input type="submit" value="Show calculation">
+            </form>
+            <form data-action="journalist#highlightCalculationVariables">
+              <input type="submit" value="Highlight variables">
+            </form>
+            
+            <div class="container">
+              <div class="box calculation">
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="cd" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="cdCalculationSpan"></span> + 
+                </div>
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="ss" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="ssCalculationSpan"></span> +
+                </div>
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="ts" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="tsCalculationSpan"></span> + 
+                </div>
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="muni" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="muniCalculationSpan"></span> + 
+                </div>
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="county" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="countyCalculationSpan"></span> + 
+                </div>
+                <div>
+                  <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="state" class="explain-button">&#x1F52E</button>
+                  <span data-journalist-target="stateCalculationSpan"></span>
+                </div>
+              </div>
+              <div class="box">
+                <h3 data-journalist-target="localitySubgroupsTableHeader"></h3>
+                <table data-journalist-target="localitySubgroupsTable">
+                  <tr>
+                    <th>Extra small</th>
+                    <td class="xs-row" data-journalist-target="xsLocalitiesRow"></td>
+                  </tr>
+                  <tr>
+                    <th>Small</th>
+                    <td class="s-row" data-journalist-target="sLocalitiesRow"></td>
+                  </tr>
+                  <tr>
+                    <th>Medium</th>
+                    <td class="m-row" data-journalist-target="mLocalitiesRow"></td>
+                  </tr>
+                  <tr>
+                    <th>Large</th>
+                    <td class="l-row" data-journalist-target="lLocalitiesRow"></td>
+                  </tr>
+                  <tr>
+                    <th>Extra large</th>
+                    <td class="xl-row" data-journalist-target="xlLocalitiesRow"></td>
+                  </tr>
+                </table>
+              </div>
             </div>
         </div>
     </body>
