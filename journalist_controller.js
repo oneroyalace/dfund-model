@@ -14,13 +14,13 @@ export default class extends Controller {
   static targets = [
     "numJournalistsForm",
 
-    "cdCalculationSpan",
-    "ssCalculationSpan",
-    "tsCalculationSpan",
-    "muniCalculationSpan",
-    "countyCalculationSpan",
-    "stateCalculationSpan",
-    "calculationDiv",
+    // "cdCalculationSpan",
+    // "ssCalculationSpan",
+    // "tsCalculationSpan",
+    // "muniCalculationSpan",
+    // "countyCalculationSpan",
+    // "stateCalculationSpan",
+    // "calculationDiv",
 
 
     "numEditorialEmployeesEstimateSpan",
@@ -100,12 +100,12 @@ export default class extends Controller {
     this.countyTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCountyReporters))
     this.stateTableRowTarget.innerText = this.prettifyInteger(Math.round(totalStateReporters))
 
-    this.cdCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, cdSubgroupSizes, "cd", false)
-    this.ssCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, ssSubgroupSizes, "ss", true)
-    this.tsCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerTS, tsSubgroupSizes, "ts", false)
-    this.muniCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerMuni, muniSubgroupSizes, "muni", false)
-    this.countyCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCounty, countySubgroupSizes, "county", true)
-    this.stateCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerState, stateSubgroupSizes, "state", true)
+    // this.cdCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, cdSubgroupSizes, "cd", false)
+    // this.ssCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, ssSubgroupSizes, "ss", true)
+    // this.tsCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerTS, tsSubgroupSizes, "ts", false)
+    // this.muniCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerMuni, muniSubgroupSizes, "muni", false)
+    // this.countyCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCounty, countySubgroupSizes, "county", true)
+    // this.stateCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerState, stateSubgroupSizes, "state", true)
 
     this.numEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(editorialEmployeesEstimate))
     this.numNonEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(nonEditorialEmployeesEstimate))

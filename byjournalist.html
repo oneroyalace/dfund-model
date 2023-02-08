@@ -48,7 +48,10 @@
         }
 
         .explanation { 
+            height: calc(28%);
+            width: fit-content;
          }
+         
         h2.boxHeader {
             text-align: center;
         }
@@ -155,9 +158,9 @@
 
     </style>
     <body>
-        <div data-controller="journalist">
+        <div data-controller="journalist" style="width: 85%; margin-left: auto; margin-right: auto;">
             <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
-                <div class="container">
+                <div class="container" >
                     <div class="box">
                         <h2 class="boxHeader">Per Congressional District</h2>
                         <table>
@@ -749,8 +752,8 @@
                             <td data-journalist-target="stateTableRow">34  </td>
                         </tr>
                     </table>
-                    <div>
-                      <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="cd" class="explain-button">Reporters covering congressional districts</button>
+<!--                     <div>
+                      <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="cd" class="explain-button">&#x1F52E</button>
                       <span data-journalist-target="cdCalculationSpan"></span> + 
                     </div>
                     <div>
@@ -772,11 +775,11 @@
                     <div>
                       <button data-action="journalist#displayLocalitySubgroupNumbers" data-locality-type="state" class="explain-button">&#x1F52E</button>
                       <span data-journalist-target="stateCalculationSpan"></span>
-                    </div>
+                    </div> -->
               </div>
             </div>
             
-            <div class="container-center-justified">
+            <!-- <div class="container-center-justified"> -->
               
 <!--               <div class="box">
                 <h3 class="locality-subgroups-table-header" data-journalist-target="localitySubgroupsTableHeader"></h3>
@@ -803,7 +806,7 @@
                   </tr>
                 </table>
               </div> -->
-            </div>
+            <!-- </div> -->
         </div>
     </body>
 
