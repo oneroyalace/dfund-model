@@ -1,14 +1,28 @@
 import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 const localityTypeColorMap = { cd: "#44AA99", ss: "#88CCEE", ts: "#DDCC77", muni: "#CC6677", county: "AA4499", state: "#882255" }
-const prettyLocalityNamesPluralized = { cd: "Congressional Districts", ss: "School Systems", ts: "Township Governments", muni: "Municipal Governments", county: "County Governments", state: "State Governments" }
-const cdSubgroupSizes = { xs: 6, s: 78, m: 129, l: 79, xl: 143 }
-const ssSubgroupSizes = { xs: 737, s: 3749, m: 4203, l: 2420, xl: 2952 }
+
+const localityNamesPrettied= { cd: "congressional district", ss: "school system", ts: "township government", muni: "municipal government", county: "county government", state: "state government" }
+const localityNamesPrettiedPluralizedCapitalized = { cd: "Congressional Districts", ss: "School Systems", ts: "Township Governments", muni: "Municipal Governments", county: "County Governments", state: "State Governments" }
+const localityNamesPrettiedPluralized = { cd: "congressional districts", ss: "school systems", ts: "township governments", muni: "municipal governments", county: "county governments", state: "state governments" }
+
+const sizesPrettied = {
+  xs: "extra-small",
+  s: "small",
+  m: "medium",
+  l: "large",
+  xl: "extra-large",
+}
+
+const subgroupSizes = {
+  cd: { xs: 6, s: 78, m: 129, l: 79, xl: 143 },
+  ss: { xs: 737, s: 3749, m: 4203, l: 2420, xl: 2952 },
 // const sdSubgroupSizes = { xs: 2301, s: 11_294, m: 10_303, l: 6628, xl: 8016 }
-const tsSubgroupSizes = { xs: 2447, s: 2497, m: 6097, l: 4283, xl: 929 }
-const muniSubgroupSizes = { xs: 1016, s: 5918, m: 5518, l: 4330, xl: 2713 }
-const countySubgroupSizes = { xs: 174, s: 1070, m: 845, l: 508, xl: 434 }
-const stateSubgroupSizes = { xs: 6, s: 21, m: 14, l: 5, xl: 4 }
+  ts: { xs: 2447, s: 2497, m: 6097, l: 4283, xl: 929 },
+  muni: { xs: 1016, s: 5918, m: 5518, l: 4330, xl: 2713 },
+  county: { xs: 174, s: 1070, m: 845, l: 508, xl: 434 },
+  state: { xs: 6, s: 21, m: 14, l: 5, xl: 4 },
+}
 
 export default class extends Controller {
   static targets = [
@@ -22,6 +36,9 @@ export default class extends Controller {
     // "stateCalculationSpan",
     // "calculationDiv",
 
+    "calculationEstimateDescriptionDiv",
+    "calculationEstimateExplanationDiv",
+    "calculationDiv",
 
     "numEditorialEmployeesEstimateSpan",
     "numNonEditorialEmployeesEstimateSpan",
@@ -33,6 +50,8 @@ export default class extends Controller {
     "muniTableRow",
     "countyTableRow",
     "stateTableRow",
+
+    "explanationContainer",
 
     // "localitySubgroupsTable",
     // "localitySubgroupsTableHeader",
@@ -46,6 +65,10 @@ export default class extends Controller {
   connect() {
     console.log("hotwired")
     this.updateEstimates()
+
+    this.setEstimateDescription("cd")
+    this.setEstimateExplanation("cd")
+    this.setEstimateCalculation("cd", false)
     // this.toggleCalculationVisibility()
   }
 
@@ -75,14 +98,20 @@ export default class extends Controller {
     let reportersPerCounty = this.sumValuesOfInputs(document.querySelectorAll(".num-county-reporters-input"))
     let reportersPerState = this.sumValuesOfInputs(document.querySelectorAll(".num-state-reporters-input"))
     
+    document.querySelector("#cd-box").dataset.reportersPer = reportersPerCD
+    document.querySelector("#ss-box").dataset.reportersPer = reportersPerSS
+    document.querySelector("#ts-box").dataset.reportersPer = reportersPerTS
+    document.querySelector("#muni-box").dataset.reportersPer = reportersPerMuni
+    document.querySelector("#county-box").dataset.reportersPer = reportersPerCounty
+    document.querySelector("#state-box").dataset.reportersPer = reportersPerState
   
-    let totalCDReporters = this.calculateLocalityTypeReportersRequired(reportersPerCD, cdSubgroupSizes)
-    let totalSSReporters = this.calculateLocalityTypeReportersRequired(reportersPerSS, ssSubgroupSizes, true)
-    let totalTSReporters = this.calculateLocalityTypeReportersRequired(reportersPerTS, tsSubgroupSizes)
-    let totalMuniReporters = this.calculateLocalityTypeReportersRequired(reportersPerMuni, muniSubgroupSizes)
-    let totalCountyReporters = this.calculateLocalityTypeReportersRequired(reportersPerCounty, countySubgroupSizes, true)
+    let totalCDReporters = this.calculateLocalityTypeReportersRequired(reportersPerCD, subgroupSizes.cd)
+    let totalSSReporters = this.calculateLocalityTypeReportersRequired(reportersPerSS, subgroupSizes.ss, true)
+    let totalTSReporters = this.calculateLocalityTypeReportersRequired(reportersPerTS, subgroupSizes.ts)
+    let totalMuniReporters = this.calculateLocalityTypeReportersRequired(reportersPerMuni, subgroupSizes.muni)
+    let totalCountyReporters = this.calculateLocalityTypeReportersRequired(reportersPerCounty, subgroupSizes.county, true)
     //why aren't there 50 states??????
-    let totalStateReporters = this.calculateLocalityTypeReportersRequired(reportersPerState, stateSubgroupSizes, true)
+    let totalStateReporters = this.calculateLocalityTypeReportersRequired(reportersPerState, subgroupSizes.state, true)
     // console.log("total cd reporters", totalCDReporters)
     // console.log("total ss reporters", totalSSReporters)
     // console.log("total ts reporters", totalTSReporters)
@@ -100,6 +129,8 @@ export default class extends Controller {
     this.countyTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCountyReporters))
     this.stateTableRowTarget.innerText = this.prettifyInteger(Math.round(totalStateReporters))
 
+
+
     // this.cdCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, cdSubgroupSizes, "cd", false)
     // this.ssCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, ssSubgroupSizes, "ss", true)
     // this.tsCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerTS, tsSubgroupSizes, "ts", false)
@@ -110,39 +141,51 @@ export default class extends Controller {
     this.numEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(editorialEmployeesEstimate))
     this.numNonEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(nonEditorialEmployeesEstimate))
     this.totalCostEstimateSpanTarget.innerText = `$${this.prettifyInteger(Math.round(totalCostEstimate))}`
+    this.setExplanations(this.explanationContainerTarget.dataset.activeLocalityType)
   }
 
-  produceCalculationSpan(reportersPerLocality, localitySizeOccurrencesMap, localityType, useMultipliers) {
-    let span = "<span>"
-    let innerSpans = []
-    const reportersPerLocalityPrefix = 
-      `<span>
-        <span class="reporters-${localityType}-span"
-              class"reporters-per-locality">${reportersPerLocality}
-        </span>
-        <span class="multiplication"> * </span>
-        <span class="opening-parens-brace">${useMultipliers ? "[" : "("}</span>
-      `
+  produceCalculationDivNoMultipliers(localityType) {
+    let totalNumberLocalities = Object.values(subgroupSizes[localityType]).reduce((a,b) => a+b)
+    let reportersPerLocality = parseFloat(document.querySelector(`#${localityType}-box`).dataset.reportersPer)
+    let div = "<div>"
+    div += `<div>
+      ${this.prettifyInteger(totalNumberLocalities)} ${localityNamesPrettiedPluralized[localityType]} * ${reportersPerLocality} editorial employee${reportersPerLocality == 0 ? "" : "s"} per ${localityNamesPrettied[localityType]}</div>`
+    div += `<div style="font-size: x-large; font-weight: bold">= 
+      ${this.prettifyInteger(Math.round(totalNumberLocalities * reportersPerLocality))} editorial employees to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
+      </div>`
+    div += "</div>"
+    return div
+  }
+  produceCalculationDiv(localityType, useMultipliers) {
+    if (!useMultipliers) {
+      return this.produceCalculationDivNoMultipliers(localityType)
+    }
+
+    let localitySizeOccurrencesMap = subgroupSizes[localityType]
+    let reportersPerLocality = parseFloat(document.querySelector(`#${localityType}-box`).dataset.reportersPer)
+    let div = "<div>"
+    let innerDivs = []
     for(const localitySize in localitySizeOccurrencesMap) {
       const localitySizeOccurrences = localitySizeOccurrencesMap[localitySize]
-      let localityTypeSpan = ""
-      if(! useMultipliers) {
-        localityTypeSpan += `<span class="${localityType}-${localitySize}-occurrences">${localitySizeOccurrences}</span>`
-        innerSpans.push(localityTypeSpan)
-        continue
-      }
-        
-      localityTypeSpan += '<span class="parentheses">(</span>'
-      localityTypeSpan += `<span class="${localityType}-${localitySize}-occurrences">${localitySizeOccurrences}</span>`
-      localityTypeSpan += '<span class="multiplication"> * </span>'
-      localityTypeSpan += `<span class="multiplier">${this.getSizeMultiplier(localitySize)}</span>`
-      localityTypeSpan += '<span class="parentheses">)</span>'
-      innerSpans.push(localityTypeSpan)
+      let innerDiv = "<div>"
+        innerDiv += `<span class="reporters-per-locality">(${reportersPerLocality} </span>`
+      innerDiv += `<span> editorial employee${reportersPerLocality == 1 ? "" : "s"} per ${localityNamesPrettied[localityType]})</span>`
+      innerDiv += '<span class="multiplication"> * </span>'
+      innerDiv += `<span class="${localityType}-${localitySize}-occurrences">(${localitySizeOccurrences} </span>`
+      innerDiv += `<span>${sizesPrettied[localitySize]} ${localityNamesPrettiedPluralized[localityType]})</span>`
+      innerDiv += '<span class="multiplication"> * </span>'
+      innerDiv += `<span class="multiplier">(${sizesPrettied[localitySize]} size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
+      innerDiv += localitySize == "xl" ? "" :  "+"
+      innerDiv += "</div>"
+      innerDivs.push(innerDiv)
     }
-    span += reportersPerLocalityPrefix + innerSpans.join('<span class="addition"> + </span>')
-    span += `<span class="closing-parens-brace">${useMultipliers ? "]" : ")"}</span>`
-    span += "</span>"
-    return span
+    div += innerDivs.join('')
+    let target= eval(`this.${localityType}TableRowTarget`)
+    // console.log(target)
+    div += `<div style="font-size: x-large; font-weight: bold">=${target.innerText} total editorial employees to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
+</div>`
+    div += "</div>"
+    return div
   }
 
   highlightCalculationVariables(event) {
@@ -164,15 +207,42 @@ export default class extends Controller {
 
   }
 
-  toggleCalculationVisibility() {
-    this.calculationDivTarget.classList.toggle("display-none")
+  setExplanations(event) {
+    let localityType
+    if(typeof(event) == "object") {
+      localityType = event.target.dataset.localityType
+    }
+    else {
+      localityType = event
+    }
+    this.explanationContainerTarget.dataset["activeLocalityType"] = localityType
+    this.setEstimateDescription(localityType)
+    this.setEstimateExplanation(localityType)
+    this.setEstimateCalculation(localityType)
+  }
+  setEstimateDescription(localityType) {
+    let estimateString = eval(`this.${localityType}TableRowTarget`).innerText
+    let estimateDescription = `The model currently estimates that ${estimateString} journalists will be required to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.`
+    this.calculationEstimateDescriptionDivTarget.innerText = estimateDescription
+  }
+
+  setEstimateExplanation(localityType) {
+    let totalLocalities = Object.values(subgroupSizes[localityType]).reduce((a,b) => a+b)
+    let reportersPer = document.querySelector(`#${localityType}-box`).dataset.reportersPer
+    let estimateExplanation = `There are ${this.prettifyInteger(totalLocalities)} ${localityNamesPrettiedPluralized[localityType]} in the country. The model allots ${reportersPer} editorial employee(s) per normal-sized ${localityNamesPrettied[localityType]} and uses preset multipliers to calculate editorial employee targets for larger and smaller ones.`
+    this.calculationEstimateExplanationDivTarget.innerText = estimateExplanation
+  }
+
+  setEstimateCalculation(localityType) {
+    let useMultipliers = ["ss", "county", "state"].includes(localityType)
+    this.calculationDivTarget.innerHTML = this.produceCalculationDiv(localityType, useMultipliers)
   }
 
   displayLocalitySubgroupNumbers(event) {
     const localityType = event.target.dataset.localityType
-    this.localitySubgroupsTableHeaderTarget.innerText = `# ${prettyLocalityNamesPluralized[localityType]}`
+    this.localitySubgroupsTableHeaderTarget.innerText = `# ${localityNamesPrettiedPluralized[localityType]}`
 
-    for (const size in cdSubgroupSizes) {  //just want access to size letters
+    for (const size in subgroupSizes.cd) {  //just want access to size letters
       // outer eval (sorry) give us a call like "this.xsLocalitiesRowTarget.innerText=eval(`${event.target.dataset.localityType}SubgroupSize`).xs
       // after inner eval, we get "this.xsLocalitiesRowTarget.innerText=cdSubgroupSizes.xs"
       const rowTarget = eval(`this.${size}LocalitiesRowTarget`)
