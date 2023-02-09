@@ -28,14 +28,6 @@ export default class extends Controller {
   static targets = [
     "numJournalistsForm",
 
-    // "cdCalculationSpan",
-    // "ssCalculationSpan",
-    // "tsCalculationSpan",
-    // "muniCalculationSpan",
-    // "countyCalculationSpan",
-    // "stateCalculationSpan",
-    // "calculationDiv",
-
     "calculationEstimateDescriptionDiv",
     "calculationEstimateExplanationDiv",
     "calculationDiv",
@@ -110,14 +102,7 @@ export default class extends Controller {
     let totalTSReporters = this.calculateLocalityTypeReportersRequired(reportersPerTS, subgroupSizes.ts)
     let totalMuniReporters = this.calculateLocalityTypeReportersRequired(reportersPerMuni, subgroupSizes.muni)
     let totalCountyReporters = this.calculateLocalityTypeReportersRequired(reportersPerCounty, subgroupSizes.county, true)
-    //why aren't there 50 states??????
     let totalStateReporters = this.calculateLocalityTypeReportersRequired(reportersPerState, subgroupSizes.state, true)
-    // console.log("total cd reporters", totalCDReporters)
-    // console.log("total ss reporters", totalSSReporters)
-    // console.log("total ts reporters", totalTSReporters)
-    // console.log("total Muni reporters", totalMuniReporters)
-    // console.log("total county reporters", totalCountyReporters)
-    // console.log("total state reporters", totalStateReporters)
     let editorialEmployeesEstimate = totalCDReporters + totalSSReporters + totalTSReporters + totalMuniReporters + totalCountyReporters + totalStateReporters
     let nonEditorialEmployeesEstimate = editorialEmployeesEstimate * (2/3)
     let totalCostEstimate = 96_058.4390217831 * (nonEditorialEmployeesEstimate + editorialEmployeesEstimate)
@@ -128,15 +113,6 @@ export default class extends Controller {
     this.muniTableRowTarget.innerText = this.prettifyInteger(Math.round(totalMuniReporters))
     this.countyTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCountyReporters))
     this.stateTableRowTarget.innerText = this.prettifyInteger(Math.round(totalStateReporters))
-
-
-
-    // this.cdCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCD, cdSubgroupSizes, "cd", false)
-    // this.ssCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerSS, ssSubgroupSizes, "ss", true)
-    // this.tsCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerTS, tsSubgroupSizes, "ts", false)
-    // this.muniCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerMuni, muniSubgroupSizes, "muni", false)
-    // this.countyCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerCounty, countySubgroupSizes, "county", true)
-    // this.stateCalculationSpanTarget.innerHTML = this.produceCalculationSpan(reportersPerState, stateSubgroupSizes, "state", true)
 
     this.numEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(editorialEmployeesEstimate))
     this.numNonEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(nonEditorialEmployeesEstimate))
