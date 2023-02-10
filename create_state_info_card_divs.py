@@ -1,4 +1,5 @@
 import csv
+import json
 import re
 import string
 
@@ -72,11 +73,37 @@ def generate_state_selector(states):
             {state_option_elements}
         </select>"""
 
+# with open("states.csv", "r", encoding="utf-8-sig") as infile:
+#     reader = csv.DictReader(infile)
+#     rows = [row for row in reader]
+#
+# for row in rows[:5]:
+#     print(generate_state_data_table(row))
+
+# print(generate_state_selector([row["State"] for row in rows]))
+
+# states csv -> json
 with open("states.csv", "r", encoding="utf-8-sig") as infile:
     reader = csv.DictReader(infile)
     rows = [row for row in reader]
-
-for row in rows[:5]:
-    print(generate_state_data_table(row))
-
-# print(generate_state_selector([row["State"] for row in rows]))
+    states = {}
+    for row in rows:
+        if row["state"] == "": continue
+        state_name = row["state"]
+        states[state_name] = {
+            "size": row["size"],
+            "population": {
+                "2021": int(row["population_2021"]),
+                "2025": int(row["population_2025"]),
+                "2030": int(row["population_2030"]),
+                },
+            "cd": int(row["cd"]),
+            "ss": int(row["ss"]),
+            "sd": int(row["sd"]),
+            "ts": None if "-" in row["ts"] else int(row["ts"]),
+            "muni": int(row["muni"]),
+            "county": None if "-" in row["county"] else int(row["county"]),
+            "state": 1,
+            "giving": int(row["foundation_giving_2015"])
+        }
+    print(json.dumps(states))

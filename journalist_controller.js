@@ -1,7 +1,6 @@
 import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 const localityTypeColorMap = { cd: "#44AA99", ss: "#88CCEE", ts: "#DDCC77", muni: "#CC6677", county: "AA4499", state: "#882255" }
-
 const localityNamesPrettied= { cd: "congressional district", ss: "school system", ts: "township government", muni: "municipal government", county: "county government", state: "state government" }
 const localityNamesPrettiedPluralizedCapitalized = { cd: "Congressional Districts", ss: "School Systems", ts: "Township Governments", muni: "Municipal Governments", county: "County Governments", state: "State Governments" }
 const localityNamesPrettiedPluralized = { cd: "congressional districts", ss: "school systems", ts: "township governments", muni: "municipal governments", county: "county governments", state: "state governments" }
@@ -214,20 +213,6 @@ export default class extends Controller {
     this.calculationDivTarget.innerHTML = this.produceCalculationDiv(localityType, useMultipliers)
   }
 
-  displayLocalitySubgroupNumbers(event) {
-    const localityType = event.target.dataset.localityType
-    this.localitySubgroupsTableHeaderTarget.innerText = `# ${localityNamesPrettiedPluralized[localityType]}`
-
-    for (const size in subgroupSizes.cd) {  //just want access to size letters
-      // outer eval (sorry) give us a call like "this.xsLocalitiesRowTarget.innerText=eval(`${event.target.dataset.localityType}SubgroupSize`).xs
-      // after inner eval, we get "this.xsLocalitiesRowTarget.innerText=cdSubgroupSizes.xs"
-      const rowTarget = eval(`this.${size}LocalitiesRowTarget`)
-      const localityTypeSubgroupSizes = eval(`${localityType}SubgroupSizes`)
-      rowTarget.innerText =  localityTypeSubgroupSizes[size]
-      document.querySelector(`.${localityType}-${size}-occurrences`).classList.toggle(`${size}-underline`)
-      this.localitySubgroupsTableTarget.querySelector(`.${size}-row`).classList.toggle(`${size}-underline`)
-    }
-  }
 
   // Add commas to an integer or stringified integer
   prettifyInteger(numberString) {
