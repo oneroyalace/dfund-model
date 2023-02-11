@@ -57,14 +57,18 @@ export default class extends Controller {
     console.log("hotwired")
     this.updateEstimates()
 
-    this.setEstimateDescription("cd")
-    this.setEstimateExplanation("cd")
-    this.setEstimateCalculation("cd", false)
+    this.setEstimateDescription("county")
+    this.setEstimateExplanation("county")
+    this.setEstimateCalculation("county", false)
     // this.toggleCalculationVisibility()
   }
 
-  showExplanation() {
-    document.querySelector(".modal-background").classList.toggle("show-modal")
+
+  toggleModal() {
+    document.querySelector(".modal").classList.toggle("show-modal")
+    document.querySelector(".modal-content").classList.toggle("invisible")
+    document.querySelector(".main-view").classList.toggle("blurred")
+    document.querySelectorAll(".num-reporters-input").forEach(i => i.classList.toggle("muted-background"))
   }
 
   // Given a set of Input elements, converts their values to integres and sums them
