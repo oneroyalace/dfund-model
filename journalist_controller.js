@@ -63,6 +63,10 @@ export default class extends Controller {
     // this.toggleCalculationVisibility()
   }
 
+  showExplanation() {
+    document.querySelector(".modal-background").classList.toggle("show-modal")
+  }
+
   // Given a set of Input elements, converts their values to integres and sums them
   sumValuesOfInputs(inputElements) {
     return [...inputElements].map(i => parseFloat(i.value))
