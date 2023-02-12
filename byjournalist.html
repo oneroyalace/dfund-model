@@ -111,6 +111,7 @@
     input.num-reporters-input {
       width: 2em;
       text-align: center;
+      float: right;
     }
 
     .input-highlighted {
@@ -244,6 +245,10 @@
     .close-button:hover {
       background-color: darkgray;
     }
+
+    .coverage-type-span {
+        display: inline-block;
+    }
   </style>
   <body>
     <div class="modal"></div>
@@ -259,52 +264,55 @@
                       <tr>
                         <th># of reporters covering...</th>
                       </tr>
-                      <tr>
-                        <td>
-                          <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Community Services</span>
+                      <tr >
+                        <td >
+                          <span class="coverage-type-span"> Community Services</span>
+                          <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" style="float: right" />
+                          
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Criminal Justice</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Criminal Justice</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="educationReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Elections</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="electionsReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Elections</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Environment</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="environmentReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Environment</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Healthcare</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="healthcareReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Healthcare</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                            <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Infrastructure</span>
+                          
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
+                            <span class="coverage-type-span">Social identity groups</span>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" style="float:right"/>
+                          
                         </td>
                       </tr>
                     </table>
@@ -317,14 +325,14 @@
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-ss-reporters-input num-reporters-input" data-state-target="educationReportersInputSS" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Social identity groups</span>
                           <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
@@ -337,50 +345,50 @@
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Community Services</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Community Services</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Criminal Justice</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Criminal Justice</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="educationReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Elections</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="electionsReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Elections</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Environment</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="environmentReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Environment</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Healthcare</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="healthcareReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Healthcare</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-ts-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputTownship" data-action="state#toggleNumReporters" />
-                          <span>Infrastructure</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Social identity groups</span>
                           <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
@@ -393,50 +401,50 @@
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Community Services</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Community Services</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Criminal Justice</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Criminal Justice</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="educationReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Elections</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="electionsReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Elections</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Environment</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="environmentReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Environment</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Healthcare</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="healthcareReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Healthcare</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-muni-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputMunicipal" data-action="state#toggleNumReporters" />
-                          <span>Infrastructure</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Social identity groups</span>
                           <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
@@ -449,50 +457,50 @@
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Community Services</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Community Services</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Criminal Justice</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Criminal Justice</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="educationReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Elections</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="electionsReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Elections</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Environment</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="environmentReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Environment</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Healthcare</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="healthcareReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Healthcare</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-county-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCounty" data-action="state#toggleNumReporters" />
-                          <span>Infrastructure</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Social identity groups</span>
                           <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
@@ -505,50 +513,50 @@
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Community Services</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Community Services</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Criminal Justice</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="criminalJusticeReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Criminal Justice</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Education</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="educationReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Education</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Elections</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="electionsReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Elections</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Environment</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="environmentReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Environment</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Healthcare</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="healthcareReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Healthcare</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputState" data-action="state#toggleNumReporters" />
-                          <span>Infrastructure</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
+                          <span class="coverage-type-span">Social identity groups</span>
                           <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
