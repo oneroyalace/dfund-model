@@ -13,6 +13,7 @@ const sizesPrettied = {
   xl: "extra-large",
 }
 
+const costPerEmployee = 96_058.4390217831
 const subgroupSizes = {
   cd: { xs: 6, s: 78, m: 129, l: 79, xl: 143 },
   ss: { xs: 737, s: 3749, m: 4203, l: 2420, xl: 2952 },
@@ -113,7 +114,7 @@ export default class extends Controller {
     let totalStateReporters = this.calculateLocalityTypeReportersRequired(reportersPerState, subgroupSizes.state, true)
     let editorialEmployeesEstimate = totalCDReporters + totalSSReporters + totalTSReporters + totalMuniReporters + totalCountyReporters + totalStateReporters
     let nonEditorialEmployeesEstimate = editorialEmployeesEstimate * (2/3)
-    let totalCostEstimate = 96_058.4390217831 * (nonEditorialEmployeesEstimate + editorialEmployeesEstimate)
+    let totalCostEstimate = costPerEmployee * (nonEditorialEmployeesEstimate + editorialEmployeesEstimate)
 
     this.cdTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCDReporters))
     this.ssTableRowTarget.innerText = this.prettifyInteger(Math.round(totalSSReporters))
@@ -166,10 +167,27 @@ export default class extends Controller {
     div += innerDivs.join('')
     let target= eval(`this.${localityType}TableRowTarget`)
     // console.log(target)
-    div += `<div style="font-size: x-large; font-weight: bold">=<span class="num-reporters-text">${target.innerText} total editorial employees</span> to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
-</div>`
+    div += `<div style="font-size: x-large; font-weight: bold">=<span class="num-reporters-text">${target.innerText} total editorial employees</span> to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US</div>`
     div += "</div>"
     return div
+  }
+
+  changeYear(event) {
+    const years = [2021, 2022, 2023]
+    let target = event.target
+    let year = event.target.value
+    let cost_2021 = (parseInt(this.numEditorialEmployeesEstimateSpanTarget.innerText.replace(",", "")) + parseInt(this.numNonEditorialEmployeesEstimateSpanTarget.innerText.replace(",", ""))) * costPerEmployee 
+    let inflated_2022 = cost_2021 * 1.065
+    let inflated_2023 = inflated_2022 * 1.03
+
+    console.log(target)
+    target.parentElement.firstElementChild.innerText = `Using ${year} dollars`
+    if(year == 2021)
+      this.totalCostEstimateSpanTarget.innerText = `$${this.prettifyInteger(Math.round(cost_2021))}`
+    if(year == 2022)
+       this.totalCostEstimateSpanTarget.innerText = `$${this.prettifyInteger(Math.round(inflated_2022))}`
+    else if (year == 2023)
+      this.totalCostEstimateSpanTarget.innerText = `$${this.prettifyInteger(Math.round(inflated_2023))}`
   }
 
   highlightCalculationVariables(event) {

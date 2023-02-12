@@ -251,6 +251,19 @@
     .coverage-type-span {
         display: inline-block;
     }
+
+    datalist {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        writing-mode: vertical-lr;
+        width: 200px;
+    }
+
+    .year-slider {
+        width: 200px;
+    }
+
   </style>
   <body>
     <div class="modal"></div>
@@ -594,13 +607,22 @@
                 </div>
               </div>
               <div class="box">
-                <div class="estimateDescription"> Funds required: </div>
+                <div class="estimateDescription"> Annual funds required: </div>
                 <div class="estimateValue">
                   <span data-journalist-target="totalCostEstimateSpan"></span>
                 </div>
               </div>
             </div>
             <button data-action="journalist#toggleModal">show calculation</button>
+        </div>
+        <div>
+            <div data-journalist-target="yearOutput">Using 2021 dollars</div>
+            <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
+            <datalist id="values">
+                <option value="2021" label="2021"></option>
+                <option value="2022" label="2022"></option>
+                <option value="2023" label="2023"></option>
+            </datalist>
         </div>
         <div class="modal-content invisible">
           <span class="close-button" data-action="click->journalist#toggleModal">×</span>
