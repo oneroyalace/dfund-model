@@ -74,6 +74,22 @@
       /*            padding: 3rem;*/
     }
 
+    .num-reporters-text {
+        color: var(--teal)
+    }
+
+    .num-localities-text {
+        color: var(--rose);
+    }
+
+    .reporters-per-text {
+        color: var(--purple);
+    }
+
+    .multiplier-text {
+        color: var(--sand);
+    }
+
     .display-none {
       display: none;
     }
@@ -186,7 +202,7 @@
       transform: translate(-50%, -50%);
       background-color: floralwhite;
       padding: 1rem 1.5rem;
-      width: 80%;
+      width: 90%;
 /*      height: 50%;*/
       border-radius: 0.5rem;
     }
@@ -238,7 +254,7 @@
               <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
                 <div class="container" style="justify-content: center; max-width: 800px ;">
                   <div class="box" id="cd-box" data-reporters-per=7>
-                    <h2 class="boxHeader">House district</h2>
+                    <h2 class="boxHeader">For each house district</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -285,10 +301,16 @@
                           <span>Infrastructure</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div class="box" id="ss-box" data-reporters-per=1>
-                    <h2 class="boxHeader">School system</h2>
+                    <h2 class="boxHeader">For each school system</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -299,10 +321,16 @@
                           <span>Education</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div class="box" id="ts-box" data-reporters-per=7>
-                    <h2 class="boxHeader">Township</h2>
+                    <h2 class="boxHeader">For each township</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -349,10 +377,16 @@
                           <span>Infrastructure</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div class="box" id="muni-box" data-reporters-per=7>
-                    <h2 class="boxHeader">Municipality</h2>
+                    <h2 class="boxHeader">For each municipality</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -399,10 +433,16 @@
                           <span>Infrastructure</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div class="box" id="county-box" data-reporters-per=7>
-                    <h2 class="boxHeader">County</h2>
+                    <h2 class="boxHeader">For each county</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -449,10 +489,16 @@
                           <span>Infrastructure</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div class="box" id="state-box" data-reporters-per=7>
-                    <h2 class="boxHeader">State</h2>
+                    <h2 class="boxHeader">For each state</h2>
                     <table>
                       <tr>
                         <th># of reporters covering...</th>
@@ -497,6 +543,12 @@
                         <td>
                           <input type="text" value="1" class="num-state-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputState" data-action="state#toggleNumReporters" />
                           <span>Infrastructure</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
+                          <span>Social identity groups</span>
                         </td>
                       </tr>
                     </table>
@@ -551,7 +603,7 @@
                 </tr>
                 <tr>
                   <td data-locality-type="cd" data-action="mouseover->journalist#setExplanations">Congressional districts</td>
-                  <td data-journalist-target="cdTableRow">34</td>
+                  <td data-journalist-target="cdTableRow">td>
                 </tr>
                 <tr>
                   <td data-locality-type="ss" data-action="mouseover->journalist#setExplanations">School systems</td>
@@ -571,7 +623,7 @@
                 </tr>
                 <tr>
                   <td data-locality-type="state" data-action="mouseover->journalist#setExplanations">State governments</td>
-                  <td data-journalist-target="stateTableRow">34 </td>
+                  <td data-journalist-target="stateTableRow"></td>
                 </tr>
               </table>
             </div>

@@ -57,9 +57,10 @@ export default class extends Controller {
     console.log("hotwired")
     this.updateEstimates()
 
-    this.setEstimateDescription("county")
-    this.setEstimateExplanation("county")
-    this.setEstimateCalculation("county", false)
+    // this.setEstimateDescription("county")
+    // this.setEstimateExplanation("county")
+    // this.setEstimateCalculation("county", false)
+    // this.setExplanations("county")
     // this.toggleCalculationVisibility()
   }
 
@@ -132,9 +133,9 @@ export default class extends Controller {
     let reportersPerLocality = parseFloat(document.querySelector(`#${localityType}-box`).dataset.reportersPer)
     let div = "<div>"
     div += `<div>
-      ${this.prettifyInteger(totalNumberLocalities)} ${localityNamesPrettiedPluralized[localityType]} * ${reportersPerLocality} editorial employee${reportersPerLocality == 0 ? "" : "s"} per ${localityNamesPrettied[localityType]}</div>`
+      <span class="num-localities-text">${this.prettifyInteger(totalNumberLocalities)} ${localityNamesPrettiedPluralized[localityType]}</span> * <span class="reporters-per-text">${reportersPerLocality} editorial employee${reportersPerLocality == 0 ? "" : "s"} per ${localityNamesPrettied[localityType]}</span></div>`
     div += `<div style="font-size: x-large; font-weight: bold">= 
-      ${this.prettifyInteger(Math.round(totalNumberLocalities * reportersPerLocality))} editorial employees to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
+      <span class="num-reporters-text">${this.prettifyInteger(Math.round(totalNumberLocalities * reportersPerLocality))} editorial employees</span> to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
       </div>`
     div += "</div>"
     return div
@@ -151,21 +152,21 @@ export default class extends Controller {
     for(const localitySize in localitySizeOccurrencesMap) {
       const localitySizeOccurrences = localitySizeOccurrencesMap[localitySize]
       let innerDiv = "<div>"
-        innerDiv += `<span class="reporters-per-locality">(${reportersPerLocality} </span>`
-      innerDiv += `<span> editorial employee${reportersPerLocality == 1 ? "" : "s"} per ${localityNamesPrettied[localityType]})</span>`
+        innerDiv += `<span class="reporters-per-text"><span class="reporters-per-locality">(${reportersPerLocality} </span>`
+      innerDiv += `<span> editorial employee${reportersPerLocality == 1 ? "" : "s"} per ${localityNamesPrettied[localityType]})</span></span>`
       innerDiv += '<span class="multiplication"> * </span>'
-      innerDiv += `<span class="${localityType}-${localitySize}-occurrences">(${localitySizeOccurrences} </span>`
-      innerDiv += `<span>${sizesPrettied[localitySize]} ${localityNamesPrettiedPluralized[localityType]})</span>`
+      innerDiv += `<span class="num-localities-text"><span class="${localityType}-${localitySize}-occurrences">(${localitySizeOccurrences} </span>`
+      innerDiv += `<span>${sizesPrettied[localitySize]} ${localityNamesPrettiedPluralized[localityType]})</span></span>`
       innerDiv += '<span class="multiplication"> * </span>'
-      innerDiv += `<span class="multiplier">(${sizesPrettied[localitySize]} size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
-      innerDiv += localitySize == "xl" ? "" :  "+"
+      innerDiv += `<span class="multiplier-text">(${sizesPrettied[localitySize]} size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
+      innerDiv += localitySize == "xl" ? "" :  " +"
       innerDiv += "</div>"
       innerDivs.push(innerDiv)
     }
     div += innerDivs.join('')
     let target= eval(`this.${localityType}TableRowTarget`)
     // console.log(target)
-    div += `<div style="font-size: x-large; font-weight: bold">=${target.innerText} total editorial employees to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
+    div += `<div style="font-size: x-large; font-weight: bold">=<span class="num-reporters-text">${target.innerText} total editorial employees</span> to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.
 </div>`
     div += "</div>"
     return div
@@ -202,18 +203,23 @@ export default class extends Controller {
     this.setEstimateDescription(localityType)
     this.setEstimateExplanation(localityType)
     this.setEstimateCalculation(localityType)
+    // this.highlightEstimateParmeters(localityType)
   }
   setEstimateDescription(localityType) {
-    let estimateString = eval(`this.${localityType}TableRowTarget`).innerText
-    let estimateDescription = `The model currently estimates that ${estimateString} journalists will be required to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.`
-    this.calculationEstimateDescriptionDivTarget.innerText = estimateDescription
+    console.log("setting estimate", localityType)
+    let target = eval(`this.${localityType}TableRowTarget`)
+    document.querySelectorAll(".num-reporters-text").forEach(i => i.classList.remove("num-reporters-text"))
+    target.parentElement.classList.toggle("num-reporters-text")
+    let estimateString = target.innerHTML
+    let estimateDescription = `The model currently estimates that <span class="num-reporters-text">${estimateString}</span> journalists will be required to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US.`
+    this.calculationEstimateDescriptionDivTarget.innerHTML = estimateDescription
   }
 
   setEstimateExplanation(localityType) {
     let totalLocalities = Object.values(subgroupSizes[localityType]).reduce((a,b) => a+b)
     let reportersPer = document.querySelector(`#${localityType}-box`).dataset.reportersPer
-    let estimateExplanation = `There are ${this.prettifyInteger(totalLocalities)} ${localityNamesPrettiedPluralized[localityType]} in the country. The model allots ${reportersPer} editorial employee(s) per normal-sized ${localityNamesPrettied[localityType]} and uses preset multipliers to calculate editorial employee targets for larger and smaller ones.`
-    this.calculationEstimateExplanationDivTarget.innerText = estimateExplanation
+    let estimateExplanation = `There are <span class="num-localities-text">${this.prettifyInteger(totalLocalities)} ${localityNamesPrettiedPluralized[localityType]}</span> in the country. The model allots <span class="reporters-per-text">${reportersPer} editorial employee(s)</span> per normal-sized ${localityNamesPrettied[localityType]} and uses <span class="multiplier-text">preset multipliers</span> to calculate editorial employee targets for larger and smaller ones.`
+    this.calculationEstimateExplanationDivTarget.innerHTML = estimateExplanation
   }
 
   setEstimateCalculation(localityType) {
