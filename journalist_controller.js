@@ -4,6 +4,7 @@ const localityTypeColorMap = { cd: "#44AA99", ss: "#88CCEE", ts: "#DDCC77", muni
 const localityNamesPrettied= { cd: "congressional district", ss: "school system", ts: "township government", muni: "municipal government", county: "county government", state: "state government" }
 const localityNamesPrettiedPluralizedCapitalized = { cd: "Congressional Districts", ss: "School Systems", ts: "Township Governments", muni: "Municipal Governments", county: "County Governments", state: "State Governments" }
 const localityNamesPrettiedPluralized = { cd: "congressional districts", ss: "school systems", ts: "township governments", muni: "municipal governments", county: "county governments", state: "state governments" }
+let lastTriggerTime
 
 const sizesPrettied = {
   xs: "extra-small",
@@ -42,6 +43,7 @@ export default class extends Controller {
     "muniTableRow",
     "countyTableRow",
     "stateTableRow",
+    "allTableRow",
 
     "explanationContainer",
 
@@ -122,6 +124,7 @@ export default class extends Controller {
     this.muniTableRowTarget.innerText = this.prettifyInteger(Math.round(totalMuniReporters))
     this.countyTableRowTarget.innerText = this.prettifyInteger(Math.round(totalCountyReporters))
     this.stateTableRowTarget.innerText = this.prettifyInteger(Math.round(totalStateReporters))
+    this.allTableRowTarget.innerText = this.prettifyInteger(Math.round(editorialEmployeesEstimate))
 
     this.numEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(editorialEmployeesEstimate))
     this.numNonEditorialEmployeesEstimateSpanTarget.innerText = this.prettifyInteger(Math.round(nonEditorialEmployeesEstimate))

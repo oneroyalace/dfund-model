@@ -13,7 +13,7 @@
       Stimulus.register("journalist", JournalistController);
     </script>
     <script type="module" src="state_controller.js"></script>
-    <title></title>
+    <title>Local News Ecosystem Cost Calculator | National Version</title>
     <script></script>
   </head>
   <style>
@@ -77,19 +77,19 @@
     }
 
     .num-reporters-text {
-        color: var(--teal)
+      color: var(--teal)
     }
 
     .num-localities-text {
-        color: var(--rose);
+      color: var(--rose);
     }
 
     .reporters-per-text {
-        color: var(--purple);
+      color: var(--purple);
     }
 
     .multiplier-text {
-        color: var(--sand);
+      color: var(--sand);
     }
 
     .display-none {
@@ -206,7 +206,7 @@
       background-color: floralwhite;
       padding: 1rem 1.5rem;
       width: 90%;
-/*      height: 50%;*/
+      /*      height: 50%;*/
       border-radius: 0.5rem;
     }
 
@@ -249,41 +249,122 @@
     }
 
     .coverage-type-span {
-        display: inline-block;
+      display: inline-block;
     }
 
     datalist {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        writing-mode: vertical-lr;
-        width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      writing-mode: vertical-lr;
+      width: 200px;
     }
 
     .year-slider {
-        width: 200px;
+      width: 200px;
     }
 
+    .locality-type-row {
+      cursor: grab;
+    }
+
+    .locality-type-row:active {
+      cursor: grabbing;
+    }
+
+    #site-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #site-header {
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #site-nav--full {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    ol.site-nav__links {
+      display: flex;
+      flex-direction: row;
+      gap: 1vw;
+      align-items: center;
+      list-style: none;
+    }
+
+    #site-nav__primary>li>a {
+      padding-bottom: 0;
+      text-decoration: none;
+      color: black;
+      font-size: 24px;
+    }
+
+    #site-nav__primary>li>a>span {
+      display: block;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    #site-nav__primary>li>a:hover>span {
+      border-bottom-color: #222222;
+    }
   </style>
   <body>
-    <div class="modal"></div>
-    <div class="page-container" data-action="click->journalist#toggleModal">
-      <div data-controller="journalist">
-        <div class="main-view">
+    <div id="site-wrapper">
+      <header id="site-header">
+        <nav id="site-nav--full">
+          <ol id="site-nav__primary" class="site-nav__links">
+            <li>
+              <a href="#about">
+                <span>About the models</span>
+              </a>
+            </li>
+            <li>
+              <a href="#calculator">
+                <span>National ecosystem calculator</span>
+              </a>
+            </li>
+            <li>
+              <a href="#about">
+                <span>State ecosystem calculator</span>
+              </a>
+            </li>
+            <li>
+              <a href="#download">
+                <span>Download the model</span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </header>
+      <div class="modal"></div>
+      <div class="page-container" data-action="click->journalist#toggleModal">
+        <div data-controller="journalist">
+          <div class="main-view">
             <div class="container-center-justified main-view">
               <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
-                <div class="container" style="justify-content: center; max-width: 800px ;">
+                <div class="container" style="justify-content: center; max-width: 1200px ;">
                   <div class="box" id="cd-box" data-reporters-per=7>
                     <h2 class="boxHeader">For each house district</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
-                      <tr >
-                        <td >
+                      <tr>
+                        <td>
                           <span class="coverage-type-span"> Community Services</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="communityServicesReportersInputCD" data-action="state#toggleNumReporters" style="float: right" />
-                          
                         </td>
                       </tr>
                       <tr>
@@ -318,16 +399,14 @@
                       </tr>
                       <tr>
                         <td>
-                            <span class="coverage-type-span">Infrastructure</span>
+                          <span class="coverage-type-span">Infrastructure</span>
                           <input type="text" value="1" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" />
-                          
                         </td>
                       </tr>
                       <tr>
                         <td>
-                            <span class="coverage-type-span">Social identity groups</span>
-                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" style="float:right"/>
-                          
+                          <span class="coverage-type-span">Social identity groups</span>
+                          <input type="text" value="0" class="num-cd-reporters-input num-reporters-input" data-state-target="infrastructureReportersInputCD" data-action="state#toggleNumReporters" style="float:right" />
                         </td>
                       </tr>
                     </table>
@@ -336,7 +415,7 @@
                     <h2 class="boxHeader">For each school system</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
                       <tr>
                         <td>
@@ -356,7 +435,7 @@
                     <h2 class="boxHeader">For each township</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
                       <tr>
                         <td>
@@ -412,7 +491,7 @@
                     <h2 class="boxHeader">For each municipality</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
                       <tr>
                         <td>
@@ -468,7 +547,7 @@
                     <h2 class="boxHeader">For each county</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
                       <tr>
                         <td>
@@ -524,7 +603,7 @@
                     <h2 class="boxHeader">For each state</h2>
                     <table>
                       <tr>
-                        <th># of reporters covering...</th>
+                        <th>How many editorial employees should cover...</th>
                       </tr>
                       <tr>
                         <td>
@@ -577,92 +656,109 @@
                     </table>
                   </div>
                 </div>
-                <button type="submit" form="form" value="update" style="padding-top: 2px; display: none;">
-                  <svg fill="#000000" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 492.88 492.88" xml:space="preserve" stroke="#000000" stroke-width="0.00492883" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
-                    <g stroke-width="0" />
-                    <g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="9.85766" />
-                    <g id="SVGRepo_iconCarrier">
-                      <g>
+                <div id="button-container" class="container-center-justified" style="margin-top: 0.75rem">
+                  <button data-action="journalist#toggleModal" style="padding-top: 2px; display: flex; flex-direction: column; align-items: center; margin-right: 1rem;">
+                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path d="M480 106.667c-117.82 0-213.333 95.512-213.333 213.333v1280c0 117.82 95.512 213.333 213.333 213.333h960c117.82 0 213.333-95.512 213.333-213.333V320c0-117.82-95.512-213.333-213.333-213.333H480ZM480 0h960c176.731 0 320 143.269 320 320v1280c0 176.731-143.269 320-320 320H480c-176.731 0-320-143.269-320-320V320C160 143.269 303.269 0 480 0Zm106.667 320C527.757 320 480 367.756 480 426.667v106.666C480 592.243 527.756 640 586.667 640h746.666c58.91 0 106.667-47.756 106.667-106.667V426.667c0-58.91-47.756-106.667-106.667-106.667H586.667Zm0-106.667h746.666c117.821 0 213.334 95.513 213.334 213.334v106.666c0 117.821-95.513 213.334-213.334 213.334H586.667c-117.821 0-213.334-95.513-213.334-213.334V426.667c0-117.821 95.513-213.334 213.334-213.334ZM480 853.333h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666C1072.243 853.333 1120 901.09 1120 960c0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1066.667 800 1018.91 800 960c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Zm-853.333 320h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1386.667 800 1338.91 800 1280c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Zm-853.333 320h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1706.667 800 1658.91 800 1600c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Z"></path>
+                      </g>
+                    </svg>
+                    <div>Show calculation</div>
+                  </button>
+                  <button type="submit" form="form">
+                    <svg fill="#000000" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 492.88 492.88" xml:space="preserve" stroke="#000000" stroke-width="0.00492883" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
+                      <g stroke-width="0" />
+                      <g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="9.85766" />
+                      <g id="SVGRepo_iconCarrier">
                         <g>
-                          <path d="M122.941,374.241c-20.1-18.1-34.6-39.8-44.1-63.1c-25.2-61.8-13.4-135.3,35.8-186l45.4,45.4c2.5,2.5,7,0.7,7.6-3 l24.8-162.3c0.4-2.7-1.9-5-4.6-4.6l-162.4,24.8c-3.7,0.6-5.5,5.1-3,7.6l45.5,45.5c-75.1,76.8-87.9,192-38.6,282 c14.8,27.1,35.3,51.9,61.4,72.7c44.4,35.3,99,52.2,153.2,51.1l10.2-66.7C207.441,421.641,159.441,407.241,122.941,374.241z" />
-                          <path d="M424.941,414.341c75.1-76.8,87.9-192,38.6-282c-14.8-27.1-35.3-51.9-61.4-72.7c-44.4-35.3-99-52.2-153.2-51.1l-10.2,66.7 c46.6-4,94.7,10.4,131.2,43.4c20.1,18.1,34.6,39.8,44.1,63.1c25.2,61.8,13.4,135.3-35.8,186l-45.4-45.4c-2.5-2.5-7-0.7-7.6,3 l-24.8,162.3c-0.4,2.7,1.9,5,4.6,4.6l162.4-24.8c3.7-0.6,5.4-5.1,3-7.6L424.941,414.341z" />
+                          <g>
+                            <path d="M122.941,374.241c-20.1-18.1-34.6-39.8-44.1-63.1c-25.2-61.8-13.4-135.3,35.8-186l45.4,45.4c2.5,2.5,7,0.7,7.6-3 l24.8-162.3c0.4-2.7-1.9-5-4.6-4.6l-162.4,24.8c-3.7,0.6-5.5,5.1-3,7.6l45.5,45.5c-75.1,76.8-87.9,192-38.6,282 c14.8,27.1,35.3,51.9,61.4,72.7c44.4,35.3,99,52.2,153.2,51.1l10.2-66.7C207.441,421.641,159.441,407.241,122.941,374.241z" />
+                            <path d="M424.941,414.341c75.1-76.8,87.9-192,38.6-282c-14.8-27.1-35.3-51.9-61.4-72.7c-44.4-35.3-99-52.2-153.2-51.1l-10.2,66.7 c46.6-4,94.7,10.4,131.2,43.4c20.1,18.1,34.6,39.8,44.1,63.1c25.2,61.8,13.4,135.3-35.8,186l-45.4-45.4c-2.5-2.5-7-0.7-7.6,3 l-24.8,162.3c-0.4,2.7,1.9,5,4.6,4.6l162.4-24.8c3.7-0.6,5.4-5.1,3-7.6L424.941,414.341z" />
+                          </g>
                         </g>
                       </g>
-                    </g>
-                  </svg>
-                </button>
+                    </svg>
+                    <div>Refresh calculation</div>
+                  </button>
+                </div>
               </form>
             </div>
-            <div class="container-center-justified" style="flex-direction: row; width: 80%; margin-left: auto; margin-right: auto;">
+            <div class="container-center-justified" style="flex-direction: row; width: 80%; margin-left: auto; margin-right: auto; margin-top: 0.75rem">
               <div class="box">
-                <div class="estimateDescription"> Editorial employees required </div>
+                <div class="estimateDescription">Total editorial employees required</div>
                 <div class="estimateValue">
                   <span data-journalist-target="numEditorialEmployeesEstimateSpan" class="num-journalists-estimate"></span>
                 </div>
               </div>
               <div class="box">
-                <div class="estimateDescription"> Non-editorial employees required </div>
+                <div class="estimateDescription">Total non-editorial employees required</div>
                 <div class="estimateValue">
                   <span data-journalist-target="numNonEditorialEmployeesEstimateSpan" class="num-journalists-estimate"></span>
                 </div>
               </div>
               <div class="box">
-                <div class="estimateDescription"> Annual funds required: </div>
+                <div class="estimateDescription">Annual funds required:</div>
                 <div class="estimateValue">
                   <span data-journalist-target="totalCostEstimateSpan"></span>
                 </div>
               </div>
             </div>
-            <button data-action="journalist#toggleModal">show calculation</button>
-        </div>
-        <div>
+          </div>
+          <div>
             <div data-journalist-target="yearOutput">Using 2021 dollars</div>
             <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
             <datalist id="values">
-                <option value="2021" label="2021"></option>
-                <option value="2022" label="2022"></option>
-                <option value="2023" label="2023"></option>
+              <option value="2021" label="2021"></option>
+              <option value="2022" label="2022"></option>
+              <option value="2023" label="2023"></option>
             </datalist>
-        </div>
-        <div class="modal-content invisible">
-          <span class="close-button" data-action="click->journalist#toggleModal">×</span>
-          <div class="container" style="flex-wrap: nowrap; margin-left: auto; margin-top: auto; margin-right: 20px">
-            <div class="box calculation" style="padding: 0.5rem;">
-              <table class="calculation-table">
-                <tr>
-                  <th style="padding-right: 1rem; text-align: left">Reporters required to cover...</th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <td data-locality-type="cd" data-action="mouseover->journalist#setExplanations">Congressional districts</td>
-                  <td data-journalist-target="cdTableRow">td>
-                </tr>
-                <tr>
-                  <td data-locality-type="ss" data-action="mouseover->journalist#setExplanations">School systems</td>
-                  <td data-journalist-target="ssTableRow">34</td>
-                </tr>
-                <tr>
-                  <td data-locality-type="ts" data-action="mouseover->journalist#setExplanations">Townships</td>
-                  <td data-journalist-target="tsTableRow">34</td>
-                </tr>
-                <tr>
-                  <td data-locality-type="muni" data-action="mouseover->journalist#setExplanations">Municipalities</td>
-                  <td data-journalist-target="muniTableRow">34</td>
-                </tr>
-                <tr>
-                  <td data-locality-type="county" data-action="mouseover->journalist#setExplanations">County governments</td>
-                  <td data-journalist-target="countyTableRow">34</td>
-                </tr>
-                <tr>
-                  <td data-locality-type="state" data-action="mouseover->journalist#setExplanations">State governments</td>
-                  <td data-journalist-target="stateTableRow"></td>
-                </tr>
-              </table>
-            </div>
-            <div data-journalist-target="explanationContainer" data-active-locality-type="cd" class="container" style="flex-direction: column; flex-shrink: 3;">
-              <div class="box explanation" data-journalist-target="calculationEstimateDescriptionDiv"></div>
-              <div class="box explanation" data-journalist-target="calculationEstimateExplanationDiv"></div>
-              <div class="box explanation calculation" data-journalist-target="calculationDiv"></div>
+          </div>
+          <div class="modal-content invisible">
+            <span class="close-button" data-action="click->journalist#toggleModal">×</span>
+            <div class="container" style="flex-wrap: nowrap; margin-left: auto; margin-top: auto; margin-right: 20px; align-items: flex-start;">
+              <div class="box calculation" style="padding: 0.5rem;">
+                <table class="calculation-table">
+                  <tr>
+                    <th style="padding-right: 1rem; text-align: left">Reporters required to cover...</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="county" data-action="click->journalist#setExplanations">County governments</td>
+                    <td data-journalist-target="countyTableRow">34</td>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="cd" data-action="click->journalist#setExplanations">Congressional districts</td>
+                    <td data-journalist-target="cdTableRow">td>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="ss" data-action="click->journalist#setExplanations">School systems</td>
+                    <td data-journalist-target="ssTableRow">34</td>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="ts" data-action="click->journalist#setExplanations">Townships</td>
+                    <td data-journalist-target="tsTableRow">34</td>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="muni" data-action="click->journalist#setExplanations">Municipalities</td>
+                    <td data-journalist-target="muniTableRow">34</td>
+                  </tr>
+                  <tr>
+                    <td class="locality-type-row" data-locality-type="state" data-action="click->journalist#setExplanations">State governments</td>
+                    <td data-journalist-target="stateTableRow"></td>
+                  </tr>
+                  <tr>
+                    <td data-locality-type="all">All localities</td>
+                    <td data-journalist-target="allTableRow"></td>
+                  </tr>
+                </table>
+              </div>
+              <div data-journalist-target="explanationContainer" data-active-locality-type="county" class="container" style="flex-direction: column; flex-shrink: 3;">
+                <div class="box explanation" data-journalist-target="calculationEstimateDescriptionDiv"></div>
+                <div class="box explanation" data-journalist-target="calculationEstimateExplanationDiv"></div>
+                <div class="box explanation calculation" data-journalist-target="calculationDiv"></div>
+              </div>
             </div>
           </div>
         </div>
