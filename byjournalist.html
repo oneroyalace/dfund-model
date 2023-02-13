@@ -322,7 +322,7 @@
 
     .column-container {
         --container--max-width: 1400px;
-        --container--gap: max(1rem, 5vw);
+        --container--gap: 1rem; /* Makes middle column (for main content) take up most of the screen... tbd on side effects*/
         width: 100%;
         display: grid;
         grid-template-columns: 1fr min(var(--container--max-width), 100% - var(--container--gap)*2) 1fr;
