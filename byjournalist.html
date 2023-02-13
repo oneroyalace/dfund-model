@@ -319,6 +319,24 @@
     #site-nav__primary>li>a:hover>span {
       border-bottom-color: #222222;
     }
+
+    .column-container {
+        --container--max-width: 1400px;
+        --container--gap: max(1rem, 5vw);
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr min(var(--container--max-width), 100% - var(--container--gap)*2) 1fr;
+/*        grid-column-gap: var(--container--gap);*/
+    }
+
+    #national-calculator__estimates-section {
+        flex-direction: row;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.75rem;
+    }
+
+
   </style>
   <body>
     <div id="site-wrapper">
@@ -350,9 +368,9 @@
       </header>
       <div class="modal"></div>
       <div class="page-container" data-action="click->journalist#toggleModal">
-        <div data-controller="journalist">
-          <div class="main-view">
-            <div class="container-center-justified main-view">
+        <div data-controller="journalist" class="column-container">
+          <div class="national-calulator" style="grid-column: 2;">
+            <div id="national-calculator__num-reporters-selection" class="container-center-justified">
               <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
                 <div class="container" style="justify-content: center; max-width: 1200px ;">
                   <div class="box" id="cd-box" data-reporters-per=7>
@@ -685,7 +703,7 @@
                 </div>
               </form>
             </div>
-            <div class="container-center-justified" style="flex-direction: row; width: 80%; margin-left: auto; margin-right: auto; margin-top: 0.75rem">
+            <div id="national-calculator__estimates-section" class="container-center-justified">
               <div class="box">
                 <div class="estimateDescription">Total editorial employees required</div>
                 <div class="estimateValue">
@@ -705,16 +723,19 @@
                 </div>
               </div>
             </div>
+            <div id="inflation-slider">
+              <div data-journalist-target="yearOutput">
+              <span>Using 2021 dollars</span>
+              </div>
+                <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
+                <datalist id="values">
+                  <option value="2021" label="2021"></option>
+                  <option value="2022" label="2022"></option>
+                  <option value="2023" label="2023"></option>
+                </datalist>
+            </div>
           </div>
-          <div>
-            <div data-journalist-target="yearOutput">Using 2021 dollars</div>
-            <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
-            <datalist id="values">
-              <option value="2021" label="2021"></option>
-              <option value="2022" label="2022"></option>
-              <option value="2023" label="2023"></option>
-            </datalist>
-          </div>
+
           <div class="modal-content invisible">
             <span class="close-button" data-action="click->journalist#toggleModal">×</span>
             <div class="container" style="flex-wrap: nowrap; margin-left: auto; margin-top: auto; margin-right: 20px; align-items: flex-start;">
