@@ -374,6 +374,13 @@
 
       }
 
+      #section--download {
+        background-color: #0e4b91;
+        color: white;
+        grid-column: 1/-1;
+        margin-top: 3rem;
+      }
+
       #section--instructions {
         background-color: black;
         color: white;
@@ -910,11 +917,11 @@
                         <span>Estimating cost using 2021 dollars</span>
                       </div>
                       <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider">
-                      <datalist id="values">
+             <!--          <datalist id="values">
                         <option value="2021" label="2021"></option>
                         <option value="2022" label="2022"></option>
                         <option value="2023" label="2023"></option>
-                      </datalist>
+                      </datalist> -->
                   </div>
                 </div>
               </form>
@@ -939,7 +946,12 @@
                 </div>
               </div>
             </div>
-            
+          </div>
+          <div id="section--download" class="full-bleed">
+              <div class="lg-mx-auto lg-max-w-2xl">
+                  <h2 class="h2-large" style="text-align: center;">Download the model</h2>
+                  <p>Click <a href="journalism_ecosystem_model_2022_03_09.xlsx">here</a> to download the journalism eocystem financial model.</p>
+              </div>
           </div>
           <div class="modal-content invisible">
             <span class="close-button" data-action="click->journalist#toggleModal">×</span>
