@@ -137,75 +137,6 @@
         float: right;
       }
 
-      .input-highlighted {
-        border-width: thick;
-      }
-
-      .span-highlighted {
-        border-style: solid;
-        border-width: thick;
-      }
-
-      input.num-cd-reporters-input-highlighted,
-      span.reporters-cd-span-highlighted {
-        border-color: var(--teal)
-      }
-
-      input.num-ss-reporters-input-highlighted,
-      span.reporters-ss-span-highlighted {
-        border-color: var(--cyan)
-      }
-
-      input.num-ts-reporters-input-highlighted,
-      span.reporters-ts-span-highlighted {
-        border-color: var(--sand)
-      }
-
-      input.num-muni-reporters-input-highlighted,
-      span.reporters-muni-span-highlighted {
-        border-color: var(--rose)
-      }
-
-      input.num-county-reporters-input-highlighted,
-      span.reporters-county-span-highlighted {
-        border-color: var(--purple)
-      }
-
-      input.num-state-reporters-input-highlighted,
-      span.reporters-state-span-highlighted {
-        border-color: var(--wine)
-      }
-
-      .xs-underline {
-        text-decoration: underline;
-        text-decoration-thickness: var(--calculation-underline-thickness);
-        text-decoration-color: var(--teal);
-      }
-
-      .s-underline {
-        text-decoration: underline;
-        text-decoration-thickness: var(--calculation-underline-thickness);
-        text-decoration-color: var(--cyan);
-      }
-
-      .m-underline {
-        text-decoration: underline;
-        text-decoration-thickness: var(--calculation-underline-thickness);
-        text-decoration-color: var(--sand);
-      }
-
-      .l-underline {
-        text-decoration: underline;
-        text-decoration-thickness: var(--calculation-underline-thickness);
-        text-decoration-color: var(--rose);
-      }
-
-      .xl-underline {
-        text-decoration: underline;
-        text-decoration-thickness: var(--calculation-underline-thickness);
-        text-decoration-color: var(--puruple);
-      }
-
       .modal {
         position: fixed;
         left: 0;
@@ -370,10 +301,6 @@
         font-size: 24px;
       }
 
-      #section--blocks {
-
-      }
-
       #section--download {
         background-color: #0e4b91;
         color: white;
@@ -395,22 +322,13 @@
         margin-top: 5rem;
       }
 
-      .masked-image {
+      .image-div {
         position: relative;
         overflow: hidden;
       }
 
-      .masked-image img {
+      .image-div img {
         max-height: 400px;
-        /*          position: absolute;
-        top: 0;
-        left: 0;
-        width: auto;
-        height: auto;
-        min-width: 100%;
-        max-width: 100%;
-        max-width: 155%;
-        min-width: 75.2%;*/
       }
 
       .full-bleed {
@@ -498,7 +416,7 @@
               </a>
             </li>
             <li>
-              <a href="#calculator">
+              <a href="#section--instructions">
                 <span>National ecosystem calculator</span>
               </a>
             </li>
@@ -508,7 +426,7 @@
               </a>
             </li>
             <li>
-              <a href="#download">
+              <a href="#section--download">
                 <span>Download the model</span>
               </a>
             </li>
@@ -522,7 +440,7 @@
             <p>In 2022, DemocracyFund asked, "What would it cost to ensure that everyone in the United States had access to the news and information they need?" They enlisted the help of SeaChange, a non-profit specializing in financial analysis, to build a model estimating the cost of providing local news to every community in the country.</p>
           </div>
           <div id="section--blocks" class="lg-full-bleed lg-grid lg-grid-cols-2">
-            <div id="description" class="my-20 lg-my-0 lg-p-20">
+            <div id="about" class="my-20 lg-my-0 lg-p-20">
               <div class="lg-mx-auto lg-max-w-xl">
                 <h2 class="h2-large">What does the model do?</h2>
                 <p>The Journalism Ecosystem model estimates the cost of fully funding local news ecosystems at the school district, township, city, county, congressional distsrict, and state levels. To estimate that number, it combines the number of these localities in the U.S. with journalism expense numbers. Locality counts are taken from the U.S. Census, and journalism expense numbers are drawn from anonymized data provided by the Institue for Nonprofit News.</p>
@@ -543,12 +461,12 @@
               </div>
             </div>
             <div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(225,125,42, .8);">
-              <div class="masked-image">
+              <div class="image-div">
                 <img src="newspapers.jpg">
               </div>
             </div>
             <div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(145,183,50, .8);">
-              <div class="masked-image">
+              <div class="image-div">
                 <img src="newspaper.jpg">
               </div>
             </div>
@@ -950,7 +868,7 @@
           <div id="section--download" class="full-bleed">
               <div class="lg-mx-auto lg-max-w-2xl">
                   <h2 class="h2-large" style="text-align: center;">Download the model</h2>
-                  <p>Click <a href="journalism_ecosystem_model_2022_03_09.xlsx">here</a> to download the journalism eocystem financial model.</p>
+                  <p style="text-align: center;">Click <a href="journalism_ecosystem_model_2022_03_09.xlsx">here</a> to download the journalism ecoystem financial model.</p>
               </div>
           </div>
           <div class="modal-content invisible">
