@@ -71,8 +71,18 @@ export default class extends Controller {
   toggleModal() {
     document.querySelector(".modal").classList.toggle("show-modal")
     document.querySelector(".modal-content").classList.toggle("invisible")
-    document.querySelector(".main-view").classList.toggle("blurred")
+    document.querySelector("#national-calculator").classList.toggle("blurred")
     document.querySelectorAll(".num-reporters-input").forEach(i => i.classList.toggle("muted-background"))
+  }
+
+  hideModal() {
+    console.log("hiding modal")
+    if(document.querySelector(".modal").classList.contains("show-modal"))
+      this.toggleModal()
+  }
+
+  showModal() {
+    this.toggleModal()
   }
 
   // Given a set of Input elements, converts their values to integres and sums them
@@ -184,7 +194,7 @@ export default class extends Controller {
     let inflated_2023 = inflated_2022 * 1.03
 
     console.log(target)
-    target.parentElement.firstElementChild.innerText = `Using ${year} dollars`
+    target.parentElement.firstElementChild.innerText = `Estimating using ${year} dollars`
     if(year == 2021)
       this.totalCostEstimateSpanTarget.innerText = `$${this.prettifyInteger(Math.round(cost_2021))}`
     if(year == 2022)
