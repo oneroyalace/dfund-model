@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Source+Serif+Pro' rel='stylesheet'>
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module">
@@ -13,7 +15,7 @@
       Stimulus.register("journalist", JournalistController);
     </script>
     <script type="module" src="state_controller.js"></script>
-    <title>Local News Ecosystem Cost Calculator | National Version</title>
+    <title>Journalism Ecosystem Model | National Version</title>
     <script></script>
   </head>
   <style>
@@ -26,9 +28,23 @@
       --wine: #882255;
       --calculation-underline-thickness: 3pt;
     }
-
+/*
+    @font-face {
+        font-family: "Source Serif Pro";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("https://fonts.gstatic.com/s/sourceserifpro/v15/neIQzD-0qpwxpaWvjeD0X88SAOeauXo-oBOL.woff2") format("woff2");
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+    }
+*/
     body {
       background-color: #fdf9f6;
+      font-family: "Source Serif Pro", serif;
+    }
+
+    body a {
+			color: inherit;
     }
 
     .container {
@@ -285,6 +301,7 @@
       justify-content: center;
       align-items: center;
       gap: 1rem;
+      margin-bottom: 3rem;
     }
 
     #site-nav--full {
@@ -307,7 +324,8 @@
       padding-bottom: 0;
       text-decoration: none;
       color: black;
-      font-size: 24px;
+      font-size: 16px;
+      text-transform: uppercase;
     }
 
     #site-nav__primary>li>a>span {
@@ -321,21 +339,110 @@
     }
 
     .column-container {
-        --container--max-width: 1400px;
-        --container--gap: 1rem; /* Makes middle column (for main content) take up most of the screen... tbd on side effects*/
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr min(var(--container--max-width), 100% - var(--container--gap)*2) 1fr;
-/*        grid-column-gap: var(--container--gap);*/
+      --container--max-width: 1200px;
+      --container--gap: 1rem;
+      /* Makes middle column (for main content) take up most of the screen... tbd on side effects*/
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr min(var(--container--max-width), 100% - var(--container--gap)*2) 1fr;
+      /*        grid-column-gap: var(--container--gap);*/
     }
 
     #national-calculator__estimates-section {
-        flex-direction: row;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0.75rem;
+      flex-direction: row;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0.75rem;
     }
 
+    #section--top-page-description {
+    	grid-column: 2;
+    	text-align: center;
+    	margin-left: auto;
+    	margin-right: auto;
+    	max-width: 48rem;
+    	font-size: 24px;
+    }
+
+    #section--blocks {
+
+    }
+
+   	.my-20 {
+   		margin-bottom: 5rem;
+   		margin-top: 5rem;
+   	}
+
+   	.masked-image {
+  		position: relative;
+  		overflow: hidden;
+  	}
+
+  	.masked-image img {
+  		max-height: 400px;
+/*  		position: absolute;
+  		top: 0;
+  		left: 0;
+  		width: auto;
+  		height: auto;
+  		min-width: 100%;
+  		max-width: 100%;
+  		max-width: 155%;
+  		min-width: 75.2%;*/
+  	}
+
+    @media screen and (min-width: 1024px) {
+    	.lg-grid-cols-2 {
+    		grid-template-columns: repeat(2, minmax(0,1fr));
+    	}
+
+    	.lg-grid {
+    		display: grid;
+    	}
+
+    	/* Stretch into side columns*/
+    	.lg-full-bleed {
+    		width: 100%;
+    		grid-column: 1/-1;
+    	}
+
+    	.lg-my-0 {
+    		margin-bottom: 0;
+    		margin-top: 0;
+    	}
+
+    	.lg-p-20 {
+    		padding: 5rem;
+    	}
+
+    	.lg-mx-auto {
+    		margin-left: auto;
+    		margin-right: auto;
+    	}
+
+    	.lg-max-w-xl {
+    		max-width: 36rem;
+    	}
+
+    	.lg-flex {
+    		display: flex;
+    	}
+
+    	.lg-place-content-center {
+    		place-content: center;
+    	}
+
+    	.lg-overflow-visible {
+    		overflow: visible;
+    	}
+
+    	.lg-relative {
+    		position: relative;
+    	}
+
+
+
+    }
 
   </style>
   <body>
@@ -349,7 +456,7 @@
               </a>
             </li>
             <li>
-              <a href="#calculator">
+              <a href="#calculators">
                 <span>National ecosystem calculator</span>
               </a>
             </li>
@@ -369,6 +476,48 @@
       <div class="modal"></div>
       <div class="page-container" data-action="click->journalist#toggleModal">
         <div data-controller="journalist" class="column-container">
+        	<div id="section--top-page-description">
+						In 2022, DemocracyFund asked, "What would it cost to ensure that everyone in the United States had access to the news and information they need?" They enlisted the help of SeaChange, a non-profit specializing in financial analysis, to build a model estimating the cost of providing local news to every community in the country.
+        	</div>
+        	<div id="section--blocks" class="lg-full-bleed lg-grid lg-grid-cols-2">
+                <div class="my-20 lg-my-0 lg-p-20">
+                    <div class="lg-mx-auto lg-max-w-xl">
+                        <h2>What does the model do?</h2>
+                        <p>The Journalism Ecosystem model estimates the cost of fully funding local news ecosystems at the school district, township, city, county, congressional distsrict, and state levels. To estimate that number, it combines the number of these localities in the U.S. with journalism expense numbers. Locality counts are taken from the U.S. Census, and journalism expense numbers are drawn from anonymized data provided by the Institue for Nonprofit News.</p>
+                    </div>
+                </div>
+                <div class="my-20 lg-my-0 lg-p-20">
+                    <div class="lg-mx-auto lg-max-w-xl">
+                        <h2>What's on this website?</h2>
+                        <p>This website showcases <a href="#calculators">two interactive calculators</a> that implement the logic of the model, allowing new users to easily interact with it. The calculators on this website explain how the model arives at its cost estimates, hopefully easing user's paths to directly interacting with and changing the model themselves.</p>
+                        <p>This website also hosts a version of the model <a href="#download">available for download</a>.</p>
+                        <p>This website is maintained by the <a href="https://dewitt.sanford.duke.edu/">DeWitt Wallace Center for Media & Democracy</a>, part of Duke University's Sanford School for Public Policy.</p>
+                    </div>
+                </div>
+        		<div class="my-20 lg-my-0 lg-p-20">
+        			<div class="lg-mx-auto lg-max-w-xl">
+        				<h2>Calculator 1: Estimate costs for the national news ecosystem</h2>
+        				<p>This calculator allows the user to input the minimum desired number of editorial staff per focus per coverage unit. For example, the user could ask that the model calculate the costs of funding local news ecosystems to the point that each coverage unit (e.g., a county or municipality) is covered by an education reporter, a community services reporter, and a criminal justice reporter. The model would then calculate the costs and personnel required to staff newsrooms at that level. The calculator online differs slightly from the model developed by SeaChange in that it allows the user to select the number of editorial employees assigned to each individual type of coverage unit. We made this change to demonstrate how flexible the model’s framework was and how it can be changed to introduce more granularity. </p>
+        			</div>
+        		</div>
+        		<div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(225,125,42, .8);">
+        			<div class="masked-image">
+        				<img src="newspapers.jpg">
+        			</div>
+        		</div>
+        		<div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(145,183,50, .8);">
+        			<div class="masked-image">
+        				<img src="newspaper.jpg">
+        			</div>
+        		</div>
+        		<div class="my-20 lg-my-0 lg-p-20">
+        			<div class="lg-mx-auto lg-max-w-xl">
+        				<h2>Calculator 2: Estimate costs for a single state’s news ecosystem</h2>
+        				<p>This calculator functions much like the national news ecosystem calculator but also allows the user to assign additional reporters to a state based on its population. In addition to being used as a benchmark for statewide journalist ecosystems, the state calculator may provide a useful prototype for researchers hoping to transform the model for use in smaller localities (e.g., counties or cities).</p>
+        			</div>
+        		</div>
+
+        	</div>
           <div class="national-calulator" style="grid-column: 2;">
             <div id="national-calculator__num-reporters-selection" class="container-center-justified">
               <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
@@ -725,17 +874,16 @@
             </div>
             <div id="inflation-slider">
               <div data-journalist-target="yearOutput">
-              <span>Using 2021 dollars</span>
+                <span>Using 2021 dollars</span>
               </div>
-                <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
-                <datalist id="values">
-                  <option value="2021" label="2021"></option>
-                  <option value="2022" label="2022"></option>
-                  <option value="2023" label="2023"></option>
-                </datalist>
+              <input data-journalist-target="yearSlider" data-action="input->journalist#changeYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider" />
+              <datalist id="values">
+                <option value="2021" label="2021"></option>
+                <option value="2022" label="2022"></option>
+                <option value="2023" label="2023"></option>
+              </datalist>
             </div>
           </div>
-
           <div class="modal-content invisible">
             <span class="close-button" data-action="click->journalist#toggleModal">×</span>
             <div class="container" style="flex-wrap: nowrap; margin-left: auto; margin-top: auto; margin-right: 20px; align-items: flex-start;">
