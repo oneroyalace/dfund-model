@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script type="module">
-            import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
-            import StateController from "./state_controller.js";
-            window.Stimulus = Application.start();
-
-            Stimulus.register("state", StateController);
-        </script>
-        <script type="module" src="state_controller.js"></script>
-        <title></title>
-        <script></script>
-    </head>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module">
+      import {
+        Application,
+        Controller
+      } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
+      import StateController from "./state_controller.js";
+      window.Stimulus = Application.start();
+      Stimulus.register("state", StateController);
+    </script>
+    <!-- <script type="module" src="state_controller.js"></script> -->
+    <title>Journalism Ecosystem Model | State Version</title>
+    <script></script>
     <style>
         body {
             background-color: #fdf9f6;
@@ -22,12 +25,7 @@
             display: flex;
             flex-wrap: wrap;
         }
-        .stateTableInactive {
-            display: none;
-        }
-        .stateTableActive {
-            display: inline;
-        }
+
         .stateTableHeader {
             text-align: left;
         }
@@ -194,7 +192,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <div class="box">
-                        <table class="stateTableActive" data-state-target="stateTable">
+                        <table data-state-target="stateTable">
                             <tr>
                                 <th class="stateTableHeader">State</th>
                                 <td data-state-target="stateNameStateTableRow">sdf</td>
@@ -266,12 +264,6 @@
                     </div>
                     
                 </div>
-            </div>
-            <div data-journalist-target="calculationEstimateDescriptionDiv" class="box">
-            </div>
-            <div data-journalist-target="calculationEstimateExplanationDiv" class="box">
-            </div>
-            <div data-journalist-target="calculationDiv"class="box">
             </div>
         </div>
     </body>
