@@ -450,21 +450,25 @@
             <div id="about" class="my-20 lg-my-0 lg-p-20">
               <div class="lg-mx-auto lg-max-w-xl">
                 <h2 class="h2-large">What does the model do?</h2>
-                <p>The Journalism Ecosystem model estimates the cost of fully funding local news ecosystems at the school district, township, city, county, congressional distsrict, and state levels. To estimate that number, it combines the number of these localities in the U.S. with journalism expense numbers. Locality counts are taken from the U.S. Census, and journalism expense numbers are drawn from anonymized data provided by the Institue for Nonprofit News.</p>
+                <p>The Journalism Ecosystem model estimates the cost of fully funding local news ecosystems at the school district, township, city, county, congressional distsrict, and state levels. To estimate that number, it combines US Census data with real-world journalism expense figures drawn from an anonymized dataset provided by the Institue for Nonprofit News.</p>
               </div>
             </div>
             <div class="my-20 lg-my-0 lg-p-20">
               <div class="lg-mx-auto lg-max-w-xl">
                 <h2 class="h2-large">What's on this website?</h2>
-                <p>This website showcases <a href="#calculators">two interactive calculators</a> that implement the logic of the model, allowing new users to easily interact with it. The calculators on this website explain how the model arives at its cost estimates, hopefully easing user's paths to directly interacting with and changing the model themselves. </p>
-                <p>This website also hosts a version of the model <a href="#download">available for download</a>. </p>
-                <p>This website is maintained by the <a href="https://dewitt.sanford.duke.edu/">DeWitt Wallace Center for Media &amp; Democracy</a>, part of Duke University's Sanford School for Public Policy. </p>
+                <p>This website showcases <a href="#calculators">two interactive calculators</a> that recreate the logic of the model, allowing users to easily interact with its ideas. The calculators on this website also explain how the model arives at its cost estimates, hopefully easing users' paths to directly engaging with and changing the model themselves. </p>
+                
+                <p>This website is maintained by the <a href="https://dewitt.sanford.duke.edu/">DeWitt Wallace Center for Media &amp; Democracy</a>, part of Duke University's Sanford School for Public Policy.</p>
               </div>
             </div>
             <div class="my-20 lg-my-0 lg-p-20">
               <div class="lg-mx-auto lg-max-w-xl">
                 <h2 class="h2-large">Calculator 1: Estimate costs for the national news ecosystem</h2>
-                <p>This calculator allows the user to input the minimum desired number of editorial staff per focus per coverage unit. For example, the user could ask that the model calculate the costs of funding local news ecosystems to the point that each coverage unit (e.g., a county or municipality) is covered by an education reporter, a community services reporter, and a criminal justice reporter. The model would then calculate the costs and personnel required to staff newsrooms at that level. The calculator online differs slightly from the model developed by SeaChange in that it allows the user to select the number of editorial employees assigned to each individual type of coverage unit. We made this change to demonstrate how flexible the model’s framework was and how it can be changed to introduce more granularity. </p>
+                <p>One of our calculators re-implements a part of the model that estimates the cost of funding local news around the country.</p>
+                <p>Following the lead of the model, the calculator lets users specify the number of editorial employees to be funded across localities. For example, the user could specify that all municipalities in the country be covered by an education reporter, a community services reporter, and a criminal justice reporter.</p>
+                <p>Upon seeing that input, the calculator would  count the number of municipalities in the country and multiply that figure by 3 (reporters/county) to calculate the total number of editorial employees required to cover cities at that level.</p>
+                <p>To determine the cost of funding those employees, the calculator would multiply that total number of editorial employees by average expense data based off numbers from the Institue for Nonprofit News.</p> 
+                <p>The national ecosystem calculator hosted on this website differs slightly from the model developed by SeaChange in that it allows the user to select the number of editorial employees assigned to each type of locality. We made this change to demonstrate how the model can easily be changed to introduce more granularity.</p>
               </div>
             </div>
             <div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(225,125,42, .8);">
@@ -480,17 +484,17 @@
             <div class="my-20 lg-my-0 lg-p-20">
               <div class="lg-mx-auto lg-max-w-xl">
                 <h2 class="h2-large">Calculator 2: Estimate costs for a single state’s news ecosystem</h2>
-                <p>This calculator functions much like the national news ecosystem calculator but also allows the user to assign additional reporters to a state based on its population. In addition to being used as a benchmark for statewide journalist ecosystems, the state calculator may provide a useful prototype for researchers hoping to transform the model for use in smaller localities (e.g., counties or cities).</p>
+                <p>Our second calculator functions much like the national news ecosystem calculator but estimates numbers at the state level. The state calculator may provide a useful prototype for researchers hoping to transform the model to explore the costs of funding local news ecosystems at smaller scales (e.g., at the city or county level).</p>
               </div>
             </div>
           </div>
           <div id="section--instructions" class="py-10 lg-py-20 full-bleed">
             <div class="lg-mx-auto lg-max-w-2xl">
                 <h2 class="h2-large">Journalism ecosystem cost calculator instructions</h2>
-                <p>The calculator below uses the model's journalist expense figures and census data to approximate a cost for funding local news ecosystems across the nation.</p>
+                <p>The calculator below uses data from the U.S. Census and the Institue for Nonprofit News to approximate a cost for funding local news ecosystems across the nation.</p>
                 <p> Try modifying the inputs below to see how different allocations of journalists across localities changes the total cost of the ecosytem. After changing the inputs, makes sure to press "Enter" on your keyboard or click on the "Update calculation" button.</p>
-                <p>To see how numbers are being calculated, click the "Show calculation" button underneath tne inputs. </p>
-                <p>Click <a href="">here</a> to view the state news ecosystem expense calculator
+                <p>To see how numbers are being calculated, click the "Show calculation" button underneath the inputs.</p>
+                <p>Click <a href="state_calculator">here</a> to view the state news ecosystem expense calculator</p>
             </div>
           </div>
           <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism ecosystem cost calculator—national version</h2>
@@ -875,7 +879,7 @@
           <div id="section--download" class="full-bleed">
               <div class="lg-mx-auto lg-max-w-2xl">
                   <h2 class="h2-large" style="text-align: center;">Download the model</h2>
-                  <p style="text-align: center;">Click <a href="journalism_ecosystem_model_2022_03_09.xlsx">here</a> to download the journalism ecoystem financial model.</p>
+                  <p>The model isn't available for direct web download right now. If you'd like a copy of it, please email asa[dot]royal[at]duke.edu.</p>
               </div>
           </div>
           <div class="modal-content invisible">
