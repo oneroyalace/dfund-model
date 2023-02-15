@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module">
+      import {
+        Application,
+        Controller
+      } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
+      import StateController from "./state_controller.js";
+      window.Stimulus = Application.start();
+      Stimulus.register("state", StateController);
+    </script>
+    <script type="module" src="state_controller.js"></script>
+    <title>Journalism Ecosystem Model | State Version</title>
+    <script></script>
+    <style>
+      :root {
+        --teal: #44AA99;
+        --cyan: #88CCEE;
+        --sand: #DDCC77;
+        --rose: #CC6677;
+        --purple: #AA4499;
+        --wine: #882255;
+        --calculation-underline-thickness: 3pt;
+      }
+
+    /*
+      @font-face {
+          font-family: "Source Serif Pro";
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url("https://fonts.gstatic.com/s/sourceserifpro/v15/neIQzD-0qpwxpaWvjeD0X88SAOeauXo-oBOL.woff2") format("woff2");
+          unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+      }
+    */
+      body {
+        background-color: #fdf9f6;
+        font-family: "Source Serif Pro", serif;
+      }
+
+      body a {
+        color: inherit;
+      }
+
+      .h2-large {
+        font-size: 40px;
+        font-weight: 600;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .container-center-justified {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .box {
+        margin: 3px;
+        padding: 0.25rem;
+        border: solid 2px;
+        border-radius: 10px;
+      }
+
+      .explanation {
+        font-size: x-large;
+      }
+
+      h2.boxHeader {
+        text-align: center;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      div.estimateDescription {
+        font-size: x-large;
+      }
+
+      div.estimateValue {
+        font-size: xxx-large;
+      }
+
+      div.calculation {
+        font-size: larger;
+      }
+
+      table.calculation-table tr,
+      table.calculation-table th {
+        /*            padding: 3rem;*/
+      }
+
+      .num-reporters-text {
+        color: var(--teal)
+      }
+
+      .num-localities-text {
+        color: var(--rose);
+      }
+
+      .reporters-per-text {
+        color: var(--purple);
+      }
+
+      .multiplier-text {
+        color: var(--sand);
+      }
+
+      .display-none {
+        display: none;
+      }
+
+      .subgroups-table-row-header {
+        text-align: left;
+      }
+
+      .locality-subgroups-table-header {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+      }
+
+      .locality-subgroups-table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      input.num-reporters-input {
+        width: 2em;
+        text-align: center;
+        float: right;
+      }
+
+      .modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.1);
+        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s
+      }
+
+      .modal-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: floralwhite;
+        padding: 1rem 1.5rem;
+        width: 90%;
+        /*      height: 50%;*/
+        border-radius: 0.5rem;
+      }
+
+      .invisible {
+        visibility: hidden;
+      }
+
+      .show-modal {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1.0);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+      }
+
+      .blurred {
+        filter: blur(2px);
+      }
+
+      .muted-background {
+        background-color: inherit;
+      }
+
+      .page-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      .close-button {
+        float: right;
+        width: 1.5rem;
+        line-height: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: lightgray;
+      }
+
+      .close-button:hover {
+        background-color: darkgray;
+      }
+
+      .coverage-type-span {
+        display: inline-block;
+      }
+
+      datalist {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+/*        writing-mode: vertical-lr;*/
+        width: 200px;
+      }
+
+      .year-slider {
+        width: 200px;
+        background: "#d3d3d3";
+      }
+
+      .locality-type-row {
+        cursor: grab;
+      }
+
+      .locality-type-row:active {
+        cursor: grabbing;
+      }
+
+      #site-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #site-header {
+        position: relative;
+        z-index: 10;
+        border-bottom: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      #site-nav--full {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      ol.site-nav__links {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+        align-items: center;
+        list-style: none;
+      }
+
+      #site-nav__primary>li>a {
+        padding-bottom: 0;
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      #site-nav__primary>li>a>span {
+        display: block;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid transparent;
+      }
+
+      #site-nav__primary>li>a:hover>span {
+        border-bottom-color: #222222;
+      }
+
+      .column-container {
+        --container--max-width: 1200px;
+        --container--gap: 1rem;
+        /* Makes middle column (for main content) take up most of the screen... tbd on side effects*/
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr min(var(--container--max-width), 100% - var(--container--gap)*2) 1fr;
+        /*        grid-column-gap: var(--container--gap);*/
+      }
+
+      #national-calculator__estimates-section {
+        flex-direction: row;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.75rem;
+      }
+
+      #section--top-page-description {
+        grid-column: 2;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 48rem;
+        font-size: 24px;
+      }
+
+      #section--download {
+        background-color: #0e4b91;
+        color: white;
+        grid-column: 1/-1;
+        margin-top: 3rem;
+      }
+
+      #section--instructions {
+        background-color: black;
+        color: white;
+      }
+
+      #national-calculator {
+         grid-column: 2;
+      }
+
+      .my-20 {
+        margin-bottom: 5rem;
+        margin-top: 5rem;
+      }
+
+      .image-div {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-div img {
+        max-height: 400px;
+      }
+
+      .full-bleed {
+          width: 100%;
+          grid-column: 1/-1;
+        }
+
+      .py-10 {
+        padding-bottom: 2.5rem;
+        padding-top: 2.5rem;
+      }
+
+
+      @media screen and (min-width: 1024px) {
+        .lg-grid-cols-2 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .lg-grid {
+          display: grid;
+        }
+
+        /* Stretch into side columns*/
+        .lg-full-bleed {
+          width: 100%;
+          grid-column: 1/-1;
+        }
+
+        .lg-my-0 {
+          margin-bottom: 0;
+          margin-top: 0;
+        }
+
+        .lg-p-20 {
+          padding: 2rem;
+        }
+
+        .lg-py-20 {
+            padding-bottom: 5rem;
+            padding-top: 5rem;
+        }
+
+        .lg-mx-auto {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .lg-max-w-xl {
+          max-width: 36rem;
+        }
+
+        .lg-max-w-2xl {
+          max-width: 42rem;
+        }
+
+        .lg-flex {
+          display: flex;
+        }
+
+        .lg-place-content-center {
+          place-content: center;
+        }
+
+        .lg-overflow-visible {
+          overflow: visible;
+        }
+
+        .lg-relative {
+          position: relative;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div data-controller="state" id="site-wrapper">
+      <header id="site-header">
+        <div id="site-logo">
+            <img src="https://dewitt.sanford.duke.edu/wp-content/uploads/sites/3/2017/12/dwc-logo-play-button-400.png" style="width: 150px; height: 150px">
+        </div>
+        <nav id="site-nav--full">
+          <ol id="site-nav__primary" class="site-nav__links">
+            <li>
+              <a href="#about">
+                <span>About</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section--instructions">
+                <span>National ecosystem calculator</span>
+              </a>
+            </li>
+            <li>
+              <a href="#about">
+                <span>State ecosystem calculator</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section--download">
+                <span>Download the model</span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </header>
+      <div class="modal"></div>
+      <div class="page-container">
+        <div class="column-container">
+          <div id="section--top-page-description"> 
+            <p>In 2022, DemocracyFund asked, "What would it cost to ensure that everyone in the United States had access to the news and information they need?" They enlisted the help of SeaChange, a non-profit specializing in financial analysis, to build a model estimating the cost of providing local news to every community in the country.</p>
+          </div>
+          <div id="section--blocks" class="lg-full-bleed lg-grid lg-grid-cols-2">
+            <div id="about" class="my-20 lg-my-0 lg-p-20">
+              <div class="lg-mx-auto lg-max-w-xl">
+                <h2 class="h2-large">What does the model do?</h2>
+                <p>The Journalism Ecosystem model estimates the cost of fully funding local news ecosystems at the school district, township, city, county, congressional distsrict, and state levels. To estimate that number, it combines the number of these localities in the U.S. with journalism expense numbers. Locality counts are taken from the U.S. Census, and journalism expense numbers are drawn from anonymized data provided by the Institue for Nonprofit News.</p>
+              </div>
+            </div>
+            <div class="my-20 lg-my-0 lg-p-20">
+              <div class="lg-mx-auto lg-max-w-xl">
+                <h2 class="h2-large">What's on this website?</h2>
+                <p>This website showcases <a href="#calculators">two interactive calculators</a> that implement the logic of the model, allowing new users to easily interact with it. The calculators on this website explain how the model arives at its cost estimates, hopefully easing user's paths to directly interacting with and changing the model themselves. </p>
+                <p>This website also hosts a version of the model <a href="#download">available for download</a>. </p>
+                <p>This website is maintained by the <a href="https://dewitt.sanford.duke.edu/">DeWitt Wallace Center for Media &amp; Democracy</a>, part of Duke University's Sanford School for Public Policy. </p>
+              </div>
+            </div>
+            <div class="my-20 lg-my-0 lg-p-20">
+              <div class="lg-mx-auto lg-max-w-xl">
+                <h2 class="h2-large">Calculator 1: Estimate costs for the national news ecosystem</h2>
+                <p>This calculator allows the user to input the minimum desired number of editorial staff per focus per coverage unit. For example, the user could ask that the model calculate the costs of funding local news ecosystems to the point that each coverage unit (e.g., a county or municipality) is covered by an education reporter, a community services reporter, and a criminal justice reporter. The model would then calculate the costs and personnel required to staff newsrooms at that level. The calculator online differs slightly from the model developed by SeaChange in that it allows the user to select the number of editorial employees assigned to each individual type of coverage unit. We made this change to demonstrate how flexible the model’s framework was and how it can be changed to introduce more granularity. </p>
+              </div>
+            </div>
+            <div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(225,125,42, .8);">
+              <div class="image-div">
+                <img src="newspapers.jpg">
+              </div>
+            </div>
+            <div class="lg-p-20 lg-flex lg-place-content-center lg-overflow-visible lg-relative" style="background-color: rgba(145,183,50, .8);">
+              <div class="image-div">
+                <img src="newspaper.jpg">
+              </div>
+            </div>
+            <div class="my-20 lg-my-0 lg-p-20">
+              <div class="lg-mx-auto lg-max-w-xl">
+                <h2 class="h2-large">Calculator 2: Estimate costs for a single state’s news ecosystem</h2>
+                <p>This calculator functions much like the national news ecosystem calculator but also allows the user to assign additional reporters to a state based on its population. In addition to being used as a benchmark for statewide journalist ecosystems, the state calculator may provide a useful prototype for researchers hoping to transform the model for use in smaller localities (e.g., counties or cities).</p>
+              </div>
+            </div>
+          </div>
+          <div id="section--instructions" class="py-10 lg-py-20 full-bleed">
+            <div class="lg-mx-auto lg-max-w-2xl">
+                <h2 class="h2-large">Journalism cost calculator instructions</h2>
+                <p>The calculator below uses the model's journalist expense figures and census data to approximate a cost for funding local news ecosystems across the nation.</p>
+                <p> Try modifying the inputs below to see how different allocations of journalists across localities changes the total cost of the ecosytem. After changing the inputs, makes sure to press "Enter" on your keyboard or click on the "Update calculation" button.</p>
+                <p>To see how numbers are being calculated, click the "Show calculation" button underneath tne inputs. </p>
+                <p>Click <a href="">here</a> to view the state news ecosystem expense calculator
+            </div>
+          </div>
+          <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism cost calculator—national version</h2>
+          <div id="national-calculator" class="container">
+            <div  id="left-col-box" date-state-target="selectorDiv" class="national-calculator__num-reporters-selection">
+              <div class="box">
+                <table class="demographic-reporters-table">
+                    <tr>
+                        <th>Reporters Per Demographic Area</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">Women</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span style="width: 90%;">AAPI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Black/African-American</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Indigenous</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Latinx/Hispanic</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>LGBTQIA+</span>
+                        </td>
+                    </tr>
+                </table>
+                <table class="gov-reporters-table">
+                    <tr>
+                        <th>Government Coverage Areas</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Community Services</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Criminal Justice</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Education</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Elections</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Environment</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Healthcare</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" value="1" class="num-reporters-input" data-action="state#toggleNumReporters" />
+                            <span>Infrastructure</span>
+                        </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+                    
+            <div id="state-middle-column" style="display: flex; flex-direction: column;">
+                <div class="box">
+                    <table data-state-target="stateTable">
+                        <tr>
+                            <th class="stateTableHeader">State</th>
+                            <td data-state-target="stateNameStateTableRow">sdf</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Population</th>
+                            <td data-state-target="populationStateTableRow" class="statePopulation">4,903,185</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Size tag</th>
+                            <td data-state-target="sizeStateTableRow" class="stateSize">Small</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Congressional districts</th>
+                            <td data-state-target="cdStateTableRow" class="congressionalDistricts">7</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">School Systems</th>
+                            <td data-state-target="ssStateTableRow" class="schoolSystems">137</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Special Districts</th>
+                            <td data-state-target="sdStateTableRow" class="specialDistricts">530</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Township Governments</th>
+                            <td data-state-target="tsStateTableRow"  class="townshipGovernments">-</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Municipal Governments</th>
+                            <td data-state-target="muniStateTableRow"  class="municipalGovernments">461</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">County Governments</th>
+                            <td data-state-target="countyStateTableRow"  class="countyGovernments">67</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">State Governments</th>
+                            <td data-state-target="stateStateTableRow"  class="stateGovernments">1</td>
+                        </tr>
+                        <tr>
+                            <th class="stateTableHeader">Annual Foundation Giving (2015)</th>
+                            <td data-state-target="givingStateTableRow"  class="foundationGiving">$229,406,215</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box" style="flex-grow: 1">
+                    <div class="estimateDescription">Estimated funds required:</div>
+                    <div class="estimateValue">
+                        <span>$</span>
+                        <span data-state-target="fundingEstimate"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="state-right-column" style="display: flex; flex-direction: column;">
+                <div class="box" style="flex-grow: 1;">
+                    <div class="estimateDescription">
+                        Editorial employees required:
+                    </div>
+                    <div data-state-target="editorialEstimate" class="estimateValue"></div>
+                </div>
+                <div class="box" style="flex-grow: 1;">
+                    <div class="estimateDescription">Non-editorial employees required:</div>
+                    <div data-state-target="nonEditorialEstimate" class="estimateValue"></div>
+                </div>
+                <div class="box" style="flex-grow: 1;">
+                    <div class="estimateDescription">Total staff required:</div>
+                    <div data-state-target="totalStaffEstimate" class="estimateValue"></div>
+                </div> 
+            </div>
+          </div>
+          <div id="options" class="container" style="grid-column: 2;">
+                        <select name="state" data-state-target="stateSelector" data-action="state#populateStateTable" style="margin-bottom: 1em">
+                        <option value="Alabama">Alabama</option> <option value="Alaska">Alaska</option> <option value="Arizona">Arizona</option> <option value="Arkansas">Arkansas</option> <option value="California">California</option> <option value="Colorado">Colorado</option> <option value="Connecticut">Connecticut</option> <option value="Delaware">Delaware</option> <option value="Florida">Florida</option> <option value="Georgia">Georgia</option> <option value="Hawaii">Hawaii</option> <option value="Idaho">Idaho</option> <option value="Illinois">Illinois</option> <option value="Indiana">Indiana</option> <option value="Iowa">Iowa</option> <option value="Kansas">Kansas</option> <option value="Kentucky">Kentucky</option> <option value="Louisiana">Louisiana</option> <option value="Maine">Maine</option> <option value="Maryland">Maryland</option> <option value="Massachusetts">Massachusetts</option> <option value="Michigan">Michigan</option> <option value="Minnesota">Minnesota</option> <option value="Mississippi">Mississippi</option> <option value="Missouri">Missouri</option> <option value="Montana">Montana</option> <option value="Nebraska">Nebraska</option> <option value="Nevada">Nevada</option> <option value="New Hampshire">New Hampshire</option> <option value="New Jersey">New Jersey</option> <option value="New Mexico">New Mexico</option> <option value="New York">New York</option> <option value="North Carolina">North Carolina</option> <option value="North Dakota">North Dakota</option> <option value="Ohio">Ohio</option> <option value="Oklahoma">Oklahoma</option> <option value="Oregon">Oregon</option> <option value="Pennsylvania">Pennsylvania</option> <option value="Rhode Island">Rhode Island</option> <option value="South Carolina">South Carolina</option> <option value="South Dakota">South Dakota</option> <option value="Tennessee">Tennessee</option> <option value="Texas">Texas</option> <option value="Utah">Utah</option> <option value="Vermont">Vermont</option> <option value="Virginia">Virginia</option> <option value="Washington">Washington</option> <option value="West Virginia">West Virginia</option> <option value="Wisconsin">Wisconsin</option> <option value="Wyoming">Wyoming</option>
+                </select>
+                <button data-action="state#showModal" style="padding-top: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 1rem;">
+                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path d="M480 106.667c-117.82 0-213.333 95.512-213.333 213.333v1280c0 117.82 95.512 213.333 213.333 213.333h960c117.82 0 213.333-95.512 213.333-213.333V320c0-117.82-95.512-213.333-213.333-213.333H480ZM480 0h960c176.731 0 320 143.269 320 320v1280c0 176.731-143.269 320-320 320H480c-176.731 0-320-143.269-320-320V320C160 143.269 303.269 0 480 0Zm106.667 320C527.757 320 480 367.756 480 426.667v106.666C480 592.243 527.756 640 586.667 640h746.666c58.91 0 106.667-47.756 106.667-106.667V426.667c0-58.91-47.756-106.667-106.667-106.667H586.667Zm0-106.667h746.666c117.821 0 213.334 95.513 213.334 213.334v106.666c0 117.821-95.513 213.334-213.334 213.334H586.667c-117.821 0-213.334-95.513-213.334-213.334V426.667c0-117.821 95.513-213.334 213.334-213.334ZM480 853.333h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666C1072.243 853.333 1120 901.09 1120 960c0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1066.667 800 1018.91 800 960c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Zm-853.333 320h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1386.667 800 1338.91 800 1280c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Zm-853.333 320h106.667c58.91 0 106.666 47.757 106.666 106.667 0 58.91-47.756 106.667-106.666 106.667H480c-58.91 0-106.667-47.757-106.667-106.667 0-58.91 47.757-106.667 106.667-106.667Zm426.667 0h106.666c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.756 106.667-106.667 106.667H906.667C847.757 1706.667 800 1658.91 800 1600c0-58.91 47.756-106.667 106.667-106.667Zm426.666 0H1440c58.91 0 106.667 47.757 106.667 106.667 0 58.91-47.757 106.667-106.667 106.667h-106.667c-58.91 0-106.666-47.757-106.666-106.667 0-58.91 47.756-106.667 106.666-106.667Z"></path>
+                      </g>
+                    </svg>
+                    <div>Show calculation</div>
+                  </button>
+                  <div id="inflation-slider" style="margin-left: 1rem;">
+                      <div data-state-target="yearOutput">
+                        <span>Estimating cost using 2021 dollars</span>
+                      </div>
+                      <input data-state-target="inflationSlider" data-action="input->state#changeInflationYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider">
+             <!--          <datalist id="values">
+                        <option value="2021" label="2021"></option>
+                        <option value="2022" label="2022"></option>
+                        <option value="2023" label="2023"></option> 
+                      </datalist> -->
+                  </div>
+                  <div id="population-slider" style="margin-left: 1rem;">
+                      <div data-state-target="yearOutput">
+                        <span>Estimating needs using 2020 population</span>
+                      </div>
+                      <input data-state-target="populationSlider" data-action="input->state#changePopulationYear" type="range" min="0" value="0" max="2" step="1" list="values" class="year-slider">
+             <!--          <datalist id="values">
+                        <option value="2021" label="2021"></option>
+                        <option value="2022" label="2022"></option>
+                        <option value="2023" label="2023"></option>
+                      </datalist> -->
+                  </div>
+          </div>
+          <div id="section--download" class="full-bleed">
+              <div class="lg-mx-auto lg-max-w-2xl">
+                  <h2 class="h2-large" style="text-align: center;">Download the model</h2>
+                  <p style="text-align: center;">Click <a href="journalism_ecosystem_model_2022_03_09.xlsx">here</a> to download the journalism ecoystem financial model.</p>
+              </div>
+          </div>
+          <div class="modal-content invisible">
+            <span class="close-button" data-action="click->journalist#toggleModal">×</span>
+            <div class="container" style="flex-wrap: nowrap; margin-left: auto; margin-top: auto; margin-right: 20px; align-items: flex-start;">
+              <div class="box calculation" style="padding: 0.5rem;">
+                <table class="calculation-table">
+                  <tbody>
+                    <tr>
+                      <th style="padding-right: 1rem; text-align: left">Reporters required to cover...</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="county" data-action="click->journalist#setExplanations">County governments</td>
+                      <td data-journalist-target="countyTableRow">34</td>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="cd" data-action="click->journalist#setExplanations">Congressional districts</td>
+                      <td data-journalist-target="cdTableRow">td&gt; </td>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="ss" data-action="click->journalist#setExplanations">School systems</td>
+                      <td data-journalist-target="ssTableRow">34</td>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="ts" data-action="click->journalist#setExplanations">Townships</td>
+                      <td data-journalist-target="tsTableRow">34</td>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="muni" data-action="click->journalist#setExplanations">Municipalities</td>
+                      <td data-journalist-target="muniTableRow">34</td>
+                    </tr>
+                    <tr>
+                      <td class="locality-type-row" data-locality-type="state" data-action="click->journalist#setExplanations">State governments</td>
+                      <td data-journalist-target="stateTableRow"></td>
+                    </tr>
+                    <tr>
+                      <td data-locality-type="all">All localities</td>
+                      <td data-journalist-target="allTableRow"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div data-journalist-target="explanationContainer" data-active-locality-type="county" class="container" style="flex-direction: column; flex-shrink: 3;">
+                <div class="box explanation" data-journalist-target="calculationEstimateDescriptionDiv"></div>
+                <div class="box explanation" data-journalist-target="calculationEstimateExplanationDiv"></div>
+                <div class="box explanation calculation" data-journalist-target="calculationDiv"></div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
