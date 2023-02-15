@@ -75,16 +75,6 @@ export default class extends Controller {
     document.querySelectorAll(".num-reporters-input").forEach(i => i.classList.toggle("muted-background"))
   }
 
-  hideModal() {
-    console.log("hiding modal")
-    if(document.querySelector(".modal").classList.contains("show-modal"))
-      this.toggleModal()
-  }
-
-  showModal() {
-    this.toggleModal()
-  }
-
   // Given a set of Input elements, converts their values to integres and sums them
   sumValuesOfInputs(inputElements) {
     return [...inputElements].map(i => parseFloat(i.value))
