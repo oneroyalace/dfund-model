@@ -4,9 +4,9 @@ const costPerEditorialEmployee = 96_058.43902
 let editorialEstimate
 let nonEditorialEstimate
 let fundingEstimate
-
-const localityNamesPrettied= { cd: "congressional district", ss: "school system", ts: "township government", muni: "municipal government", county: "county government", state: "state government" }
-const localityNamesPrettiedPluralized = { cd: "congressional districts", ss: "school systems", ts: "township governments", muni: "municipal governments", county: "county governments", state: "state governments" }
+const localityTypes = ["cd", "ts", "muni", "ss", "sd", "county", "state"]
+const localityNamesPrettied= { cd: "congressional district", ss: "school system", sd: "special district", ts: "township government", muni: "municipal government", county: "county government", state: "state government" }
+const localityNamesPrettiedPluralized = { cd: "congressional districts", ss: "school systems", sd: "special districts", ts: "township governments", muni: "municipal governments", county: "county governments", state: "state governments" }
 
 const inflationFactors = {
   2021: 1,
@@ -49,15 +49,25 @@ export default class extends Controller {
     "inflationSlider",
     "populationSlider",
 
+    "cdCalculationTableRow",
+    "ssCalculationTableRow",
+    "sdCalculationTableRow",
+    "tsCalculationTableRow",
+    "muniCalculationTableRow",
+    "countyCalculationTableRow",
+    "stateCalculationTableRow",
+    "_100kCalculationTableRow",
+    "allCalculationTableRow",
+
+
     "calculationEstimateDescriptionDiv",
-    "calculationExplanationDescriptionDiv",
+    "calculationEstimateExplanationDiv",
     "calculationDiv"
   ]
   connect() {
     console.log("hotwired")
     this.populateStateTable("Alabama")
     this.updateEstimates()
-    this.produceCalculationDiv()
   }
 
   getPopulationyear() {
@@ -104,6 +114,15 @@ export default class extends Controller {
     const reportersPer = this.getReportersPer()
     const sizeMultiplier = multiplierMap[activeState.size]
 
+    console.log(reportersPer*activeState.cd)
+    console.log(reportersPer*activeState.sd * sizeMultiplier)
+    console.log(reportersPer*activeState.ts)
+    console.log(reportersPer*activeState.muni )
+    console.log(reportersPer*activeState.county * sizeMultiplier)
+    console.log(reportersPer*activeState.state * sizeMultiplier)
+    console.log(reportersPer*activeState.population[this.getPopulationyear()]/100_000)
+    console.log(reportersPer*activeState.ss * sizeMultiplier)
+
     return reportersPer * (
       (activeState.cd) + 
       (activeState.sd * sizeMultiplier) +
@@ -122,12 +141,14 @@ export default class extends Controller {
 
     let div = "<div>"
     let innerDivs = []
-    const localityTypes = ["cd", "ts", "muni", "ss", "county", "state"]
-    const multiplierLocalityTypes = ["ss", "county", "state"]
+    const multiplierLocalityTypes = ["sd", "ss", "county", "state"]
 
     div += `<div>(${this.getReportersPer()} editorial employees per 100k people * state population of ${this.prettifyInteger(activeState["population"][this.getPopulationyear()])}) +</div>`
 
     for(const localityType of localityTypes) {
+      if (activeState[localityType] == 0 ){
+        continue
+      }
       let numberOfLocalities = activeState[localityType]
       let innerDiv = "<div>"
       innerDiv += `<span class="reporters-per-text">(${this.getReportersPer()} editorial employees per ${localityNamesPrettied[localityType]})</span>`
@@ -148,27 +169,6 @@ export default class extends Controller {
     div += "</div>"
     div += "</div>"
     return div
-
-    // for(const localitySize in localitySizeOccurrencesMap) {
-    //   const localitySizeOccurrences = localitySizeOccurrencesMap[localitySize]
-    //   let innerDiv = "<div>"
-    //     innerDiv += `<span class="reporters-per-text"><span class="reporters-per-locality">(${reportersPerLocality} </span>`
-    //   innerDiv += `<span> editorial employee${reportersPerLocality == 1 ? "" : "s"} per ${localityNamesPrettied[localityType]})</span></span>`
-    //   innerDiv += '<span class="multiplication"> * </span>'
-    //   innerDiv += `<span class="num-localities-text"><span class="${localityType}-${localitySize}-occurrences">(${localitySizeOccurrences} </span>`
-    //   innerDiv += `<span>${sizesPrettied[localitySize]} ${localityNamesPrettiedPluralized[localityType]})</span></span>`
-    //   innerDiv += '<span class="multiplication"> * </span>'
-    //   innerDiv += `<span class="multiplier-text">(${sizesPrettied[localitySize]} size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
-    //   innerDiv += localitySize == "xl" ? "" :  " +"
-    //   innerDiv += "</div>"
-    //   innerDivs.push(innerDiv)
-    // }
-    // div += innerDivs.join('')
-    // let target= eval(`this.${localityType}TableRowTarget`)
-    // // console.log(target)
-    // div += `<div style="font-size: x-large; font-weight: bold">=<span class="num-reporters-text">${target.innerText} total editorial employees</span> to cover all the ${localityNamesPrettiedPluralized[localityType]} in the US</div>`
-    // div += "</div>"
-    // return div
   }
 
   changeInflationYear(event) {
@@ -187,6 +187,24 @@ export default class extends Controller {
     this.updateEstimates() 
   }
 
+  
+  toggleModal() {
+    document.querySelector(".modal").classList.toggle("show-modal")
+    document.querySelector(".modal-content").classList.toggle("invisible")
+    document.querySelector("#national-calculator").classList.toggle("blurred")
+    document.querySelectorAll(".num-reporters-input").forEach(i => i.classList.toggle("muted-background"))
+  }
+
+  hideModal() {
+    console.log("hiding modal")
+    if(document.querySelector(".modal").classList.contains("show-modal"))
+      this.toggleModal()
+  }
+
+  showModal() {
+    this.toggleModal()
+  }
+
   // Re-calculate estimates of # of editorial employees, non-editorial employees, and $ required for state
   updateEstimates() {
     const activeState = this.getActiveState()
@@ -200,14 +218,73 @@ export default class extends Controller {
     this.nonEditorialEstimateTarget.innerText = this.prettifyInteger(Math.round(nonEditorialEstimate))
     this.fundingEstimateTarget.innerText = this.prettifyInteger(Math.round(fundingEstimate))
     this.totalStaffEstimateTarget.innerText = this.prettifyInteger(Math.round(editorialEstimate + nonEditorialEstimate))
+
+    this.updateCalculationTable()
+    this.updateExplanations()
   }
 
-  updateCalculationEstimate() {
-    this.calculationEstimateDescriptionDivTarget.innerText = `The model currently estimates that ${this.editorialEstimateTarget.innerText} journalists will be required to cover all the congressional districts in the US.`
-  }
+  updateCalculationTable() {
+    const activeState = states[this.getActiveState()]
+    const multiplier = multiplierMap[activeState.size]
+    this.cdCalculationTableRowTarget.innerText = activeState.cd * this.getReportersPer()
+    this.sdCalculationTableRowTarget.innerText = activeState.sd * this.getReportersPer() * multiplier
+    this.tsCalculationTableRowTarget.innerText = activeState.ts * this.getReportersPer()
+    this.muniCalculationTableRowTarget.innerText = activeState.muni * this.getReportersPer()
+    this.countyCalculationTableRowTarget.innerText = activeState.county * this.getReportersPer() * multiplier 
+    this.stateCalculationTableRowTarget.innerText = activeState.state * this.getReportersPer() * multiplier
+    this._100kCalculationTableRowTarget.innerText = Math.round((activeState.population[this.getPopulationyear()]/100_000) * this.getReportersPer())
+    this.ssCalculationTableRowTarget.innerText = activeState.ss * 1 * multiplier
 
-  updateCalculationExplanation() {
     
+    
+    
+    this.allCalculationTableRowTarget.innerText = Math.round(editorialEstimate)
+  }
+
+  //     return reportersPer * (
+  //     (activeState.cd) + 
+  //     (activeState.sd * sizeMultiplier) +
+  //     (activeState.ts) +
+  //     (activeState.muni) +
+  //     (activeState.county * sizeMultiplier) +
+  //     (activeState.state * sizeMultiplier) +
+  //     (activeState.population[this.getPopulationyear()]/100_000)) +
+  //     (activeState.ss * sizeMultiplier)
+
+  // }
+
+  updateExplanations() {
+    this.updateEstimateDescription()
+    this.updateEstimateExplanation()
+    this.updateEstimateCalculation()
+  }
+
+  updateEstimateDescription() {
+    this.calculationEstimateDescriptionDivTarget.innerText = `The model currently estimates that ${Math.round(editorialEstimate)} journalists will be required to cover all the congressional districts in the US.`
+  }
+
+  updateEstimateExplanation() {
+    const activeState = states[this.getActiveState()]
+    
+    let estimateExplanationDiv = `<div><span>There are <span class="num-localities-text">` 
+    // let localitiesSpan = '<span class="num-localities-text">'
+    let localitiesArray = []
+    for (const localityType of localityTypes.slice(0,-1)) { // we'll manually add state so we can insert an "and") 
+      let localitiesOfTypeInState = activeState[localityType]
+      if (localitiesOfTypeInState == 0) {
+        continue
+      }
+      localitiesArray.push(`${localitiesOfTypeInState} ${localitiesOfTypeInState == 1 ? localityNamesPrettied[localityType] : localityNamesPrettiedPluralized[localityType] }`)
+    }
+    estimateExplanationDiv += localitiesArray.join(", ")
+    estimateExplanationDiv += `, and 1 state government</span> in ${this.getActiveState()}. </span>`
+    estimateExplanationDiv += `<span>The model allots <span class="reporters-per-text">${this.getReportersPer()} editorial employee(s) per locality</span>, but adjusts this number for some types of localities using <span class="multiplier-text">a state size multiplier</span>.</span>`
+    console.log(estimateExplanationDiv)
+    this.calculationEstimateExplanationDivTarget.innerHTML = estimateExplanationDiv
+  }
+
+  updateEstimateCalculation(localityType) {
+    this.calculationDivTarget.innerHTML = this.produceCalculationDiv()
   }
 
   // Add commas to an integer or stringified integer

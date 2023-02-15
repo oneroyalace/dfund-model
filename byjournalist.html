@@ -97,6 +97,10 @@
         /*            padding: 3rem;*/
       }
 
+      .top-bordered-table-cell {
+        border-top: 2px solid black;
+      }
+
       .num-reporters-text {
         color: var(--teal)
       }
@@ -421,7 +425,7 @@
               </a>
             </li>
             <li>
-              <a href="#about">
+              <a href="state_calculator.html#section--instructions">
                 <span>State ecosystem calculator</span>
               </a>
             </li>
@@ -479,14 +483,14 @@
           </div>
           <div id="section--instructions" class="py-10 lg-py-20 full-bleed">
             <div class="lg-mx-auto lg-max-w-2xl">
-                <h2 class="h2-large">Journalism cost calculator instructions</h2>
+                <h2 class="h2-large">Journalism ecosystem cost calculator instructions</h2>
                 <p>The calculator below uses the model's journalist expense figures and census data to approximate a cost for funding local news ecosystems across the nation.</p>
                 <p> Try modifying the inputs below to see how different allocations of journalists across localities changes the total cost of the ecosytem. After changing the inputs, makes sure to press "Enter" on your keyboard or click on the "Update calculation" button.</p>
                 <p>To see how numbers are being calculated, click the "Show calculation" button underneath tne inputs. </p>
                 <p>Click <a href="">here</a> to view the state news ecosystem expense calculator
             </div>
           </div>
-          <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism cost calculator—national version</h2>
+          <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism ecosystem cost calculator—national version</h2>
           <div id="national-calculator">
             <div id="national-calculator__num-reporters-selection" class="container-center-justified">
               <form data-journalist-target="numJournalistsForm" data-action="journalist#toggleNumReporters" id="form">
@@ -906,8 +910,8 @@
                       <td data-journalist-target="stateTableRow"></td>
                     </tr>
                     <tr>
-                      <td data-locality-type="all">All localities</td>
-                      <td data-journalist-target="allTableRow"></td>
+                      <td class="top-bordered-table-cell" data-locality-type="all">All localities</td>
+                      <td class="top-bordered-table-cell" data-journalist-target="allTableRow"></td>
                     </tr>
                   </tbody>
                 </table>

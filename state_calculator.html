@@ -97,6 +97,10 @@
         /*            padding: 3rem;*/
       }
 
+      .top-bordered-table-cell {
+        border-top: 2px solid black;
+      }
+
       .num-reporters-text {
         color: var(--teal)
       }
@@ -416,12 +420,12 @@
               </a>
             </li>
             <li>
-              <a href="#section--instructions">
+              <a href="byjournalist.html#section--instructions">
                 <span>National ecosystem calculator</span>
               </a>
             </li>
             <li>
-              <a href="#about">
+              <a href="#section--instructions">
                 <span>State ecosystem calculator</span>
               </a>
             </li>
@@ -479,14 +483,14 @@
           </div>
           <div id="section--instructions" class="py-10 lg-py-20 full-bleed">
             <div class="lg-mx-auto lg-max-w-2xl">
-                <h2 class="h2-large">Journalism cost calculator instructions</h2>
+                <h2 class="h2-large">Journalism ecosystem cost calculator instructions</h2>
                 <p>The calculator below uses the model's journalist expense figures and census data to approximate a cost for funding local news ecosystems across the nation.</p>
                 <p> Try modifying the inputs below to see how different allocations of journalists across localities changes the total cost of the ecosytem. After changing the inputs, makes sure to press "Enter" on your keyboard or click on the "Update calculation" button.</p>
                 <p>To see how numbers are being calculated, click the "Show calculation" button underneath tne inputs. </p>
                 <p>Click <a href="">here</a> to view the state news ecosystem expense calculator
             </div>
           </div>
-          <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism cost calculator—national version</h2>
+          <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism ecosystem cost calculator—state version</h2>
           <div id="national-calculator" class="container">
             <div  id="left-col-box" date-state-target="selectorDiv" class="national-calculator__num-reporters-selection">
               <div class="box">
@@ -709,40 +713,48 @@
                       <th></th>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="county" data-action="click->journalist#setExplanations">County governments</td>
-                      <td data-journalist-target="countyTableRow">34</td>
+                      <td class="locality-type-row" data-locality-type="county">County governments</td>
+                      <td data-state-target="countyCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="cd" data-action="click->journalist#setExplanations">Congressional districts</td>
-                      <td data-journalist-target="cdTableRow">td&gt; </td>
+                      <td class="locality-type-row" data-locality-type="cd">Congressional districts</td>
+                      <td data-state-target="cdCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="ss" data-action="click->journalist#setExplanations">School systems</td>
-                      <td data-journalist-target="ssTableRow">34</td>
+                      <td class="locality-type-row" data-locality-type="ss">School systems</td>
+                      <td data-state-target="ssCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="ts" data-action="click->journalist#setExplanations">Townships</td>
-                      <td data-journalist-target="tsTableRow">34</td>
+                      <td class="locality-type-row" data-locality-type="sd">Special districts</td>
+                      <td data-state-target="sdCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="muni" data-action="click->journalist#setExplanations">Municipalities</td>
-                      <td data-journalist-target="muniTableRow">34</td>
+                      <td class="locality-type-row" data-locality-type="ts">Townships</td>
+                      <td data-state-target="tsCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td class="locality-type-row" data-locality-type="state" data-action="click->journalist#setExplanations">State governments</td>
-                      <td data-journalist-target="stateTableRow"></td>
+                      <td class="locality-type-row" data-locality-type="muni">Municipalities</td>
+                      <td data-state-target="muniCalculationTableRow">34</td>
                     </tr>
                     <tr>
-                      <td data-locality-type="all">All localities</td>
-                      <td data-journalist-target="allTableRow"></td>
+                      <td class="locality-type-row" data-locality-type="state">State governments</td>
+                      <td data-state-target="stateCalculationTableRow"></td>
+                    </tr>
+                    <tr>
+                      <td data-locality-type="all">Population/100k</td>
+                      <td data-state-target="_100kCalculationTableRow"></td>
+                    </tr>
+                    <tr>
+                      <td class="top-bordered-table-cell" data-locality-type="_100k">All localities</td>
+                      <td class="top-bordered-table-cell" data-state-target="allCalculationTableRow"></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div data-journalist-target="explanationContainer" data-active-locality-type="county" class="container" style="flex-direction: column; flex-shrink: 3;">
-                <div class="box explanation" data-journalist-target="calculationEstimateDescriptionDiv"></div>
-                <div class="box explanation" data-journalist-target="calculationEstimateExplanationDiv"></div>
-                <div class="box explanation calculation" data-journalist-target="calculationDiv"></div>
+                <div class="box explanation" data-state-target="calculationEstimateDescriptionDiv"></div>
+                <div class="box explanation" data-state-target="calculationEstimateExplanationDiv"></div>
+                <div class="box explanation calculation" data-state-target="calculationDiv"></div>
               </div>
             </div>
           </div>
