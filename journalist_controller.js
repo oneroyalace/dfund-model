@@ -172,7 +172,7 @@ export default class extends Controller {
       innerDiv += `<span class="num-localities-text"><span class="${localityType}-${localitySize}-occurrences">(${localitySizeOccurrences} </span>`
       innerDiv += `<span>${sizesPrettied[localitySize]} ${localityNamesPrettiedPluralized[localityType]})</span></span>`
       innerDiv += '<span class="multiplication"> * </span>'
-      innerDiv += `<span class="multiplier-text">(${sizesPrettied[localitySize]} size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
+      innerDiv += `<span class="multiplier-text">(${sizesPrettied[localitySize]} state size multiplier of ${this.getSizeMultiplier(localitySize)})</span>`
       innerDiv += localitySize == "xl" ? "" :  " +"
       innerDiv += "</div>"
       innerDivs.push(innerDiv)
