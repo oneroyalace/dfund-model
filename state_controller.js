@@ -94,7 +94,7 @@ export default class extends Controller {
     console.log(this.getPopulationyear(), typeof(this.getPopulationyear()))
     console.log(states[selectedState].population)
 
-    this.stateNameStateTableRowTarget.innerText = selectedState
+    // this.stateNameStateTableRowTarget.innerText = selectedState
     this.populationStateTableRowTarget.innerText = this.prettifyInteger(states[selectedState].population[this.getPopulationyear()])
     this.sizeStateTableRowTarget.innerText = states[selectedState].size
     this.cdStateTableRowTarget.innerText = states[selectedState].cd

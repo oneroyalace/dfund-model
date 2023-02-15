@@ -121,18 +121,8 @@
         display: none;
       }
 
-      .subgroups-table-row-header {
+      .state-table-header {
         text-align: left;
-      }
-
-      .locality-subgroups-table-header {
-        margin-left: 0.5em;
-        margin-right: 0.5em;
-      }
-
-      .locality-subgroups-table {
-        margin-left: auto;
-        margin-right: auto;
       }
 
       input.num-reporters-input {
@@ -291,7 +281,7 @@
         /*        grid-column-gap: var(--container--gap);*/
       }
 
-      #national-calculator__estimates-section {
+      #state-calculator__estimates-section {
         flex-direction: row;
         margin-left: auto;
         margin-right: auto;
@@ -319,8 +309,9 @@
         color: white;
       }
 
-      #national-calculator {
+      #state-calculator {
          grid-column: 2;
+         justify-content: center;
       }
 
       .my-20 {
@@ -493,8 +484,8 @@
             </div>
           </div>
           <h2 style="grid-column: 2; text-align: center;" class="h2-large">Journalism ecosystem cost calculator—state version</h2>
-          <div id="national-calculator" class="container">
-            <div  id="left-col-box" date-state-target="selectorDiv" class="national-calculator__num-reporters-selection">
+          <div id="state-calculator" class="container">
+            <div  id="left-col-box" date-state-target="selectorDiv" class="state-calculator__num-reporters-selection">
               <div class="box">
                 <table class="demographic-reporters-table">
                     <tr>
@@ -591,47 +582,49 @@
                 <div class="box">
                     <table data-state-target="stateTable">
                         <tr>
-                            <th class="stateTableHeader">State</th>
-                            <td data-state-target="stateNameStateTableRow">sdf</td>
+                            <th class="state-table-header">State</th>
+                            <td data-state-target="stateNameStateTableRow"><select name="state" data-state-target="stateSelector" data-action="state#populateStateTable">
+                                <option value="Alabama">Alabama</option> <option value="Alaska">Alaska</option> <option value="Arizona">Arizona</option> <option value="Arkansas">Arkansas</option> <option value="California">California</option> <option value="Colorado">Colorado</option> <option value="Connecticut">Connecticut</option> <option value="Delaware">Delaware</option> <option value="Florida">Florida</option> <option value="Georgia">Georgia</option> <option value="Hawaii">Hawaii</option> <option value="Idaho">Idaho</option> <option value="Illinois">Illinois</option> <option value="Indiana">Indiana</option> <option value="Iowa">Iowa</option> <option value="Kansas">Kansas</option> <option value="Kentucky">Kentucky</option> <option value="Louisiana">Louisiana</option> <option value="Maine">Maine</option> <option value="Maryland">Maryland</option> <option value="Massachusetts">Massachusetts</option> <option value="Michigan">Michigan</option> <option value="Minnesota">Minnesota</option> <option value="Mississippi">Mississippi</option> <option value="Missouri">Missouri</option> <option value="Montana">Montana</option> <option value="Nebraska">Nebraska</option> <option value="Nevada">Nevada</option> <option value="New Hampshire">New Hampshire</option> <option value="New Jersey">New Jersey</option> <option value="New Mexico">New Mexico</option> <option value="New York">New York</option> <option value="North Carolina">North Carolina</option> <option value="North Dakota">North Dakota</option> <option value="Ohio">Ohio</option> <option value="Oklahoma">Oklahoma</option> <option value="Oregon">Oregon</option> <option value="Pennsylvania">Pennsylvania</option> <option value="Rhode Island">Rhode Island</option> <option value="South Carolina">South Carolina</option> <option value="South Dakota">South Dakota</option> <option value="Tennessee">Tennessee</option> <option value="Texas">Texas</option> <option value="Utah">Utah</option> <option value="Vermont">Vermont</option> <option value="Virginia">Virginia</option> <option value="Washington">Washington</option> <option value="West Virginia">West Virginia</option> <option value="Wisconsin">Wisconsin</option> <option value="Wyoming">Wyoming</option>
+                              </select></td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Population</th>
+                            <th class="state-table-header">Population</th>
                             <td data-state-target="populationStateTableRow" class="statePopulation">4,903,185</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Size tag</th>
+                            <th class="state-table-header">Size tag</th>
                             <td data-state-target="sizeStateTableRow" class="stateSize">Small</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Congressional districts</th>
+                            <th class="state-table-header">Congressional districts</th>
                             <td data-state-target="cdStateTableRow" class="congressionalDistricts">7</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">School Systems</th>
+                            <th class="state-table-header">School Systems</th>
                             <td data-state-target="ssStateTableRow" class="schoolSystems">137</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Special Districts</th>
+                            <th class="state-table-header">Special Districts</th>
                             <td data-state-target="sdStateTableRow" class="specialDistricts">530</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Township Governments</th>
+                            <th class="state-table-header">Township Governments</th>
                             <td data-state-target="tsStateTableRow"  class="townshipGovernments">-</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Municipal Governments</th>
+                            <th class="state-table-header">Municipal Governments</th>
                             <td data-state-target="muniStateTableRow"  class="municipalGovernments">461</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">County Governments</th>
+                            <th class="state-table-header">County Governments</th>
                             <td data-state-target="countyStateTableRow"  class="countyGovernments">67</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">State Governments</th>
+                            <th class="state-table-header">State Governments</th>
                             <td data-state-target="stateStateTableRow"  class="stateGovernments">1</td>
                         </tr>
                         <tr>
-                            <th class="stateTableHeader">Annual Foundation Giving (2015)</th>
+                            <th class="state-table-header">Annual Foundation Giving (2015)</th>
                             <td data-state-target="givingStateTableRow"  class="foundationGiving">$229,406,215</td>
                         </tr>
                     </table>
@@ -661,11 +654,16 @@
                 </div> 
             </div>
           </div>
-          <div id="options" class="container" style="grid-column: 2;">
-                        <select name="state" data-state-target="stateSelector" data-action="state#populateStateTable" style="margin-bottom: 1em">
-                        <option value="Alabama">Alabama</option> <option value="Alaska">Alaska</option> <option value="Arizona">Arizona</option> <option value="Arkansas">Arkansas</option> <option value="California">California</option> <option value="Colorado">Colorado</option> <option value="Connecticut">Connecticut</option> <option value="Delaware">Delaware</option> <option value="Florida">Florida</option> <option value="Georgia">Georgia</option> <option value="Hawaii">Hawaii</option> <option value="Idaho">Idaho</option> <option value="Illinois">Illinois</option> <option value="Indiana">Indiana</option> <option value="Iowa">Iowa</option> <option value="Kansas">Kansas</option> <option value="Kentucky">Kentucky</option> <option value="Louisiana">Louisiana</option> <option value="Maine">Maine</option> <option value="Maryland">Maryland</option> <option value="Massachusetts">Massachusetts</option> <option value="Michigan">Michigan</option> <option value="Minnesota">Minnesota</option> <option value="Mississippi">Mississippi</option> <option value="Missouri">Missouri</option> <option value="Montana">Montana</option> <option value="Nebraska">Nebraska</option> <option value="Nevada">Nevada</option> <option value="New Hampshire">New Hampshire</option> <option value="New Jersey">New Jersey</option> <option value="New Mexico">New Mexico</option> <option value="New York">New York</option> <option value="North Carolina">North Carolina</option> <option value="North Dakota">North Dakota</option> <option value="Ohio">Ohio</option> <option value="Oklahoma">Oklahoma</option> <option value="Oregon">Oregon</option> <option value="Pennsylvania">Pennsylvania</option> <option value="Rhode Island">Rhode Island</option> <option value="South Carolina">South Carolina</option> <option value="South Dakota">South Dakota</option> <option value="Tennessee">Tennessee</option> <option value="Texas">Texas</option> <option value="Utah">Utah</option> <option value="Vermont">Vermont</option> <option value="Virginia">Virginia</option> <option value="Washington">Washington</option> <option value="West Virginia">West Virginia</option> <option value="Wisconsin">Wisconsin</option> <option value="Wyoming">Wyoming</option>
-                </select>
-                <button data-action="state#showModal" style="padding-top: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 1rem;">
+          <div id="options" class="container-center-justified" style="grid-column: 2;">
+                        
+                
+                  <div id="inflation-slider" style="display: flex; flex-direction: column; align-content: center; margin-right: 1rem">
+                      <div data-state-target="yearOutput">
+                        <span>Estimating cost using 2021 dollars</span>
+                      </div>
+                      <input data-state-target="inflationSlider" data-action="input->state#changeInflationYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider">
+                  </div>
+                  <button data-action="state#showModal" style="padding-top: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 1rem;">
                     <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                       <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -675,27 +673,11 @@
                     </svg>
                     <div>Show calculation</div>
                   </button>
-                  <div id="inflation-slider" style="margin-left: 1rem;">
-                      <div data-state-target="yearOutput">
-                        <span>Estimating cost using 2021 dollars</span>
-                      </div>
-                      <input data-state-target="inflationSlider" data-action="input->state#changeInflationYear" type="range" min="2021" value="2021" max="2023" step="1" list="values" class="year-slider">
-             <!--          <datalist id="values">
-                        <option value="2021" label="2021"></option>
-                        <option value="2022" label="2022"></option>
-                        <option value="2023" label="2023"></option> 
-                      </datalist> -->
-                  </div>
                   <div id="population-slider" style="margin-left: 1rem;">
                       <div data-state-target="yearOutput">
                         <span>Estimating needs using 2020 population</span>
                       </div>
                       <input data-state-target="populationSlider" data-action="input->state#changePopulationYear" type="range" min="0" value="0" max="2" step="1" list="values" class="year-slider">
-             <!--          <datalist id="values">
-                        <option value="2021" label="2021"></option>
-                        <option value="2022" label="2022"></option>
-                        <option value="2023" label="2023"></option>
-                      </datalist> -->
                   </div>
           </div>
           <div id="section--download" class="full-bleed">
